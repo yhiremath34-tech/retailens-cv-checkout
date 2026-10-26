@@ -107,7 +107,7 @@ export default function ImpactBanner() {
           </div>
 
           <a
-            href="https://github.com/opencv/opencv"
+            href="https://github.com/yhiremath34-tech/retailens-cv-checkout"
             target="_blank"
             rel="noreferrer"
             className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"

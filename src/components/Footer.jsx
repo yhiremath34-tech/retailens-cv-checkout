@@ -37,7 +37,7 @@ export default function Footer({ onNavigateToSimulator }) {
 
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://github.com/opencv/opencv"
+                href="https://github.com/yhiremath34-tech/retailens-cv-checkout"
                 target="_blank"
                 rel="noreferrer"
                 className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors"

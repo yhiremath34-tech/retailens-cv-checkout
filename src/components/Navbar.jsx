@@ -91,7 +91,7 @@ export default function Navbar({ onNavigateToSimulator }) {
 
             {/* GitHub Demo Button */}
             <a 
-              href="https://github.com/opencv/opencv" 
+              href="https://github.com/yhiremath34-tech/retailens-cv-checkout" 
               target="_blank" 
               rel="noreferrer"
               className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 border border-white/10 transition-colors"
