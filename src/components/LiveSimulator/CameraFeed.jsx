@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Camera, Eye, EyeOff, Sun, Sliders, AlertTriangle, RefreshCw, Plus, Trash2, Crosshair, Terminal, Sparkles, Check, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Camera, Sun, Sliders, AlertTriangle, RefreshCw, Plus, Trash2, Crosshair, Terminal, Sparkles, Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { CATALOG_ITEMS } from '../../data/mockData';
 
 export default function CameraFeed({
@@ -12,15 +12,15 @@ export default function CameraFeed({
   setHandOcclusion,
   claheEnabled,
   setClaheEnabled,
+  onToast,
 }) {
   const [fps, setFps] = useState(58.8);
   const [latency, setLatency] = useState(17.4);
   const [showLogs, setShowLogs] = useState(true);
   const [cvLogs, setCvLogs] = useState([]);
   const [currentTime, setCurrentTime] = useState('');
-  const [selectedItemForInspect, setSelectedItemForInspect] = useState(null);
 
-  // Dynamic FPS and Latency fluctuation to feel ultra-alive
+  // Dynamic FPS and Latency fluctuation
   useEffect(() => {
     const interval = setInterval(() => {
       setFps(+(58.2 + Math.random() * 1.6).toFixed(1));
@@ -59,40 +59,68 @@ export default function CameraFeed({
     setCvLogs(logs.slice(-5));
   }, [counterItems, handOcclusion, claheEnabled]);
 
+  const handleToggleHandOcclusion = () => {
+    const nextState = !handOcclusion;
+    setHandOcclusion(nextState);
+    if (onToast) {
+      if (nextState) {
+        onToast('warning', 'Shrinkage Alert Triggered', 'Unverified hand occlusion detected over counter item. Checkout is paused.');
+      } else {
+        onToast('success', 'Alert Resolved', 'Cart registry re-verified with OpenCV counter state.');
+      }
+    }
+  };
+
+  const handleToggleClahe = () => {
+    const nextState = !claheEnabled;
+    setClaheEnabled(nextState);
+    if (onToast) {
+      if (nextState) {
+        onToast('success', 'OpenCV CLAHE Active', 'Adaptive luminance equalization enabled. Glare neutralized.');
+      } else {
+        onToast('warning', 'Raw Lighting Mode', 'Specular glare active. Detector confidence reduced.');
+      }
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full bg-[#0B0F19] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+    <div className="flex flex-col h-full bg-[#0B0F19] rounded-2xl border border-white/10 overflow-hidden shadow-2xl w-full max-w-full">
       
       {/* Top Camera Status & Controls Bar */}
-      <div className="px-4 py-3 bg-[#111827] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
+      <div className="px-3 sm:px-4 py-3 bg-[#111827] border-b border-white/10 flex flex-wrap items-center justify-between gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="font-mono text-xs font-bold text-white tracking-wider flex items-center gap-1.5">
-              <Camera className="w-3.5 h-3.5 text-emerald-400" />
-              CAM_01_OVERHEAD_COUNTER
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
+            <span className="font-mono text-[11px] sm:text-xs font-bold text-white tracking-wider flex items-center gap-1.5 truncate">
+              <Camera className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+              CAM_01_OVERHEAD
             </span>
           </div>
           <span className="text-white/20 text-xs hidden sm:inline">|</span>
-          <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
-            1080p @ 60 FPS • RTSP / OpenCV 4.10
+          <span className="text-[10px] sm:text-[11px] font-mono text-slate-400 hidden md:inline">
+            1080p @ 60 FPS • OpenCV 4.10
           </span>
         </div>
 
         {/* Quick Simulator Preset Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
+            type="button"
             onClick={onResetDemo}
-            className="px-2.5 py-1 text-xs font-mono font-medium rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-colors flex items-center gap-1.5"
+            className="px-2.5 py-1.5 text-[11px] sm:text-xs font-mono font-medium rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-colors flex items-center gap-1.5 min-h-[36px]"
             title="Load default 3 items"
+            aria-label="Load preset items"
           >
             <RefreshCw className="w-3 h-3 text-cyan-400" />
-            <span>Preset (3 Items)</span>
+            <span>Preset (3)</span>
           </button>
           {counterItems.length > 0 && (
             <button
+              type="button"
               onClick={onClearItems}
-              className="px-2 py-1 text-xs font-mono text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-lg transition-colors flex items-center gap-1"
+              className="px-2.5 py-1.5 text-[11px] sm:text-xs font-mono text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-lg transition-colors flex items-center gap-1 min-h-[36px]"
               title="Clear all items"
+              aria-label="Clear all items from counter"
             >
               <Trash2 className="w-3 h-3" />
               <span>Clear</span>
@@ -102,43 +130,40 @@ export default function CameraFeed({
       </div>
 
       {/* Main Simulated Top-Down Counter Canvas Viewport */}
-      <div className="relative flex-1 min-h-[420px] bg-[#070A11] overflow-hidden select-none">
+      <div className="relative flex-1 min-h-[380px] sm:min-h-[420px] bg-[#070A11] overflow-hidden select-none w-full">
         
         {/* Background Coordinate Grid & Target Crosshairs */}
         <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
         
         {/* Center Target Crosshairs */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <div className="w-32 h-32 border border-emerald-500/30 rounded-full flex items-center justify-center">
+          <div className="w-24 sm:w-32 h-24 sm:h-32 border border-emerald-500/30 rounded-full flex items-center justify-center">
             <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
           </div>
-          <div className="absolute w-48 h-px bg-emerald-500/30"></div>
-          <div className="absolute h-48 w-px bg-emerald-500/30"></div>
+          <div className="absolute w-36 sm:w-48 h-px bg-emerald-500/30"></div>
+          <div className="absolute h-36 sm:h-48 w-px bg-emerald-500/30"></div>
         </div>
 
         {/* Overhead Camera Lens Corner Reticles */}
-        <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-emerald-500/60 pointer-events-none"></div>
-        <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-emerald-500/60 pointer-events-none"></div>
-        <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-emerald-500/60 pointer-events-none"></div>
-        <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-emerald-500/60 pointer-events-none"></div>
+        <div className="absolute top-3 left-3 w-3 sm:w-4 h-3 sm:h-4 border-t-2 border-l-2 border-emerald-500/60 pointer-events-none"></div>
+        <div className="absolute top-3 right-3 w-3 sm:w-4 h-3 sm:h-4 border-t-2 border-r-2 border-emerald-500/60 pointer-events-none"></div>
+        <div className="absolute bottom-3 left-3 w-3 sm:w-4 h-3 sm:h-4 border-b-2 border-l-2 border-emerald-500/60 pointer-events-none"></div>
+        <div className="absolute bottom-3 right-3 w-3 sm:w-4 h-3 sm:h-4 border-b-2 border-r-2 border-emerald-500/60 pointer-events-none"></div>
 
         {/* Live HUD Telemetry Overlay (Top-Left) */}
-        <div className="absolute top-4 left-4 z-20 pointer-events-none">
-          <div className="px-3 py-2 rounded-lg bg-black/75 backdrop-blur-md border border-white/10 font-mono text-[11px] space-y-1 text-slate-300 shadow-xl">
-            <div className="flex items-center gap-3">
+        <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20 pointer-events-none max-w-[85%]">
+          <div className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 font-mono text-[10px] sm:text-[11px] space-y-1 text-slate-300 shadow-xl">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span className="text-slate-400">FPS:</span>
               <span className="text-emerald-400 font-bold">{fps}</span>
               <span className="text-slate-600">|</span>
-              <span className="text-slate-400">Latency:</span>
+              <span className="text-slate-400">Lat:</span>
               <span className="text-cyan-400 font-bold">{latency}ms</span>
             </div>
-            <div className="flex items-center gap-2 text-[10px] text-slate-400">
+            <div className="flex items-center gap-2 text-[9px] sm:text-[10px] text-slate-400 truncate">
               <span>Mode: <strong className="text-emerald-300">CentroidTracker</strong></span>
               <span>•</span>
-              <span>Objects: <strong className="text-white">{counterItems.length}</strong></span>
-            </div>
-            <div className="text-[9px] text-slate-500">
-              {currentTime || '2026-10-26 16:35:12.482 UTC'}
+              <span>Objs: <strong className="text-white">{counterItems.length}</strong></span>
             </div>
           </div>
         </div>
@@ -146,19 +171,19 @@ export default function CameraFeed({
         {/* Glare & Illumination Simulation Overlay */}
         {!claheEnabled && (
           <div className="absolute inset-0 glare-effect pointer-events-none z-10 animate-pulse-subtle">
-            <div className="absolute top-1/4 right-1/4 px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 font-mono text-[10px] backdrop-blur-md flex items-center gap-1.5">
-              <Sun className="w-3.5 h-3.5 animate-spin text-amber-400" />
-              <span>Harsh Specular Glare Active (Confidence Degraded)</span>
+            <div className="absolute top-1/4 right-3 sm:right-1/4 px-2.5 py-1 rounded-lg bg-amber-500/25 border border-amber-500/50 text-amber-300 font-mono text-[9px] sm:text-[10px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+              <Sun className="w-3 h-3 animate-spin text-amber-400 flex-shrink-0" />
+              <span>Harsh Specular Glare Active</span>
             </div>
           </div>
         )}
 
         {/* CLAHE Active Status Pill */}
         {claheEnabled && (
-          <div className="absolute top-4 right-4 z-20 pointer-events-none">
-            <div className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-[11px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>CLAHE Equalized (Luminance Normalized)</span>
+          <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 pointer-events-none">
+            <div className="px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-[10px] sm:text-[11px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+              <Sparkles className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+              <span>CLAHE Equalized</span>
             </div>
           </div>
         )}
@@ -166,16 +191,17 @@ export default function CameraFeed({
         {/* Render Items on Counter Canvas */}
         {counterItems.length === 0 ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
-            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-3 text-slate-400">
-              <Crosshair className="w-8 h-8 text-emerald-400/60 animate-pulse" />
+            <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-3 text-slate-400">
+              <Crosshair className="w-6 sm:w-8 h-6 sm:h-8 text-emerald-400/60 animate-pulse" />
             </div>
-            <h4 className="text-sm font-bold text-white mb-1 font-sans">Checkout Counter Viewport Empty</h4>
-            <p className="text-xs text-slate-400 max-w-sm mb-4">
-              Add items from the library below to simulate top-down OpenCV object proposal, centroid coordinates, and instant cart synchronization.
+            <h4 className="text-xs sm:text-sm font-bold text-white mb-1 font-sans">Checkout Counter Viewport Empty</h4>
+            <p className="text-[11px] sm:text-xs text-slate-400 max-w-sm mb-4">
+              Click items below to simulate top-down OpenCV object proposal, centroid coordinates, and instant cart synchronization.
             </p>
             <button
+              type="button"
               onClick={onResetDemo}
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 transition-colors flex items-center gap-2"
+              className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 transition-colors flex items-center gap-2 min-h-[40px]"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Populate Counter (3 Sample Items)</span>
@@ -185,8 +211,12 @@ export default function CameraFeed({
           counterItems.map((item, idx) => {
             const isOccluded = handOcclusion && idx === 0;
             const confidenceScore = claheEnabled ? item.confidence : Math.max(0.74, item.confidence - 0.17);
-            const centroidX = item.position.x + Math.round(item.dimensions.w / 2);
-            const centroidY = item.position.y + Math.round(item.dimensions.h / 2);
+            
+            // Scaled responsive position within mobile width bounds
+            const posX = Math.max(10, Math.min(item.position.x, 300));
+            const posY = Math.max(40, Math.min(item.position.y, 280));
+            const centroidX = posX + Math.round(item.dimensions.w / 2);
+            const centroidY = posY + Math.round(item.dimensions.h / 2);
 
             return (
               <div
@@ -196,16 +226,19 @@ export default function CameraFeed({
                   isOccluded ? 'z-30' : 'z-20'
                 }`}
                 style={{
-                  left: `${item.position.x}px`,
-                  top: `${item.position.y}px`,
-                  width: `${item.dimensions.w}px`,
-                  height: `${item.dimensions.h}px`,
+                  left: `${posX}px`,
+                  top: `${posY}px`,
+                  width: `${Math.min(item.dimensions.w, 100)}px`,
+                  height: `${Math.min(item.dimensions.h, 110)}px`,
                 }}
                 title={`Click to remove ${item.name} from counter`}
+                role="button"
+                tabIndex={0}
+                aria-label={`Remove ${item.name} from counter`}
               >
                 {/* Physical Item Representation */}
                 <div 
-                  className={`relative w-full h-full rounded-xl border flex flex-col items-center justify-center p-2 text-center transition-transform group-hover:scale-105 ${
+                  className={`relative w-full h-full rounded-xl border flex flex-col items-center justify-center p-1.5 sm:p-2 text-center transition-transform group-hover:scale-105 ${
                     claheEnabled ? 'clahe-active' : ''
                   }`}
                   style={{
@@ -213,8 +246,7 @@ export default function CameraFeed({
                     borderColor: `${item.color}40`,
                   }}
                 >
-                  {/* Item Icon Placeholder */}
-                  <span className="text-2xl mb-1 filter drop-shadow">
+                  <span className="text-xl sm:text-2xl mb-0.5 filter drop-shadow">
                     {item.icon === 'coffee' && '☕'}
                     {item.icon === 'bread' && '🥖'}
                     {item.icon === 'milk' && '🥛'}
@@ -222,7 +254,7 @@ export default function CameraFeed({
                     {item.icon === 'avocado' && '🥑'}
                     {item.icon === 'yogurt' && '🫐'}
                   </span>
-                  <span className="text-[11px] font-semibold text-white leading-tight font-sans line-clamp-1">
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-white leading-tight font-sans line-clamp-1">
                     {item.name}
                   </span>
                   <span className="text-[9px] font-mono text-slate-400">
@@ -238,55 +270,49 @@ export default function CameraFeed({
                       : 'border-2 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
                   }`}
                 >
-                  {/* 4 Corner Bracket Accents (CV Style) */}
-                  <div className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-white"></div>
-                  <div className="absolute -top-1 -right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-white"></div>
-                  <div className="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-white"></div>
-                  <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-white"></div>
+                  {/* 4 Corner Bracket Accents */}
+                  <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-white"></div>
+                  <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-white"></div>
+                  <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-white"></div>
+                  <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-white"></div>
 
                   {/* Top Bounding Box Label with ID & Confidence */}
-                  <div className={`absolute -top-6 left-0 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold whitespace-nowrap shadow flex items-center gap-1 ${
+                  <div className={`absolute -top-5 sm:-top-6 left-0 px-1 py-0.5 rounded text-[8px] sm:text-[9px] font-mono font-bold whitespace-nowrap shadow flex items-center gap-1 ${
                     isOccluded
                       ? 'bg-amber-500 text-black'
                       : 'bg-emerald-500 text-black'
                   }`}>
-                    <span>ID: #{idx + 1}</span>
+                    <span>#{idx + 1}</span>
                     <span>•</span>
-                    <span>{item.name.split(' ')[0]}</span>
-                    <span>{(confidenceScore * 100).toFixed(1)}%</span>
+                    <span>{(confidenceScore * 100).toFixed(0)}%</span>
                   </div>
 
-                  {/* Centroid Tracker Dot (Pulsing Center) */}
+                  {/* Centroid Tracker Dot */}
                   <div 
                     className="absolute w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                     style={{
                       left: '50%',
                       top: '50%',
                       backgroundColor: isOccluded ? '#F59E0B' : '#06B6D4',
-                      boxShadow: isOccluded ? '0 0 10px #F59E0B' : '0 0 10px #06B6D4'
+                      boxShadow: isOccluded ? '0 0 8px #F59E0B' : '0 0 8px #06B6D4'
                     }}
-                  >
-                    <div className="absolute -top-3.5 left-2 text-[8px] font-mono text-cyan-300 whitespace-nowrap">
-                      ({centroidX}, {centroidY})
-                    </div>
-                  </div>
+                  ></div>
 
                   {/* Remove hover hint */}
-                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-black/80 text-rose-400 text-[8px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  <div className="hidden sm:block absolute -bottom-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-black/90 text-rose-400 text-[8px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     ✕ Click to remove
                   </div>
                 </div>
 
-                {/* Hand Occlusion Silhouette Overlay if triggered on first item */}
+                {/* Hand Occlusion Overlay */}
                 {isOccluded && (
-                  <div className="absolute -top-8 -left-8 w-36 h-36 pointer-events-none z-40 animate-pulse">
+                  <div className="absolute -top-6 -left-6 w-28 sm:w-36 h-28 sm:h-36 pointer-events-none z-40 animate-pulse">
                     <div className="relative w-full h-full flex items-center justify-center">
-                      {/* Stylized hand outline */}
-                      <div className="text-4xl filter drop-shadow-[0_0_12px_rgba(245,158,11,0.9)] opacity-90 transform -rotate-12">
+                      <div className="text-3xl sm:text-4xl filter drop-shadow-[0_0_12px_rgba(245,158,11,0.9)] opacity-90 transform -rotate-12">
                         ✋
                       </div>
-                      <div className="absolute -bottom-2 bg-amber-500 text-black text-[9px] font-mono font-extrabold px-1.5 py-0.5 rounded border border-black shadow">
-                        OCCLUSION 88.4%
+                      <div className="absolute -bottom-1 bg-amber-500 text-black text-[8px] sm:text-[9px] font-mono font-extrabold px-1.5 py-0.5 rounded border border-black shadow">
+                        OCCLUSION 88%
                       </div>
                     </div>
                   </div>
@@ -299,59 +325,59 @@ export default function CameraFeed({
       </div>
 
       {/* Simulator Control Toggles & Interactive Filters */}
-      <div className="p-3 bg-[#0E1424] border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+      <div className="p-2.5 sm:p-3 bg-[#0E1424] border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
         
         {/* Toggle 1: Hand Occlusion / Shrinkage Simulation */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setHandOcclusion(!handOcclusion)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 border ${
-              handOcclusion
-                ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-lg shadow-amber-500/20'
-                : 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/10'
-            }`}
-          >
-            <AlertTriangle className={`w-3.5 h-3.5 ${handOcclusion ? 'text-amber-400 animate-bounce' : 'text-slate-400'}`} />
-            <span>Simulate Hand Occlusion / Unscanned Item</span>
-            <span className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-              handOcclusion ? 'bg-amber-500 text-black' : 'bg-slate-700 text-slate-300'
-            }`}>
-              {handOcclusion ? 'ACTIVE' : 'OFF'}
-            </span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={handleToggleHandOcclusion}
+          className={`flex-1 sm:flex-none px-3 py-2 rounded-xl text-[11px] sm:text-xs font-mono font-semibold transition-all flex items-center justify-center sm:justify-start gap-2 border min-h-[42px] ${
+            handOcclusion
+              ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-lg shadow-amber-500/20'
+              : 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/10'
+          }`}
+          aria-label="Toggle hand occlusion simulation"
+        >
+          <AlertTriangle className={`w-3.5 h-3.5 flex-shrink-0 ${handOcclusion ? 'text-amber-400 animate-bounce' : 'text-slate-400'}`} />
+          <span>Simulate Occlusion</span>
+          <span className={`text-[9px] px-1.5 py-0.2 rounded font-bold ${
+            handOcclusion ? 'bg-amber-500 text-black' : 'bg-slate-700 text-slate-300'
+          }`}>
+            {handOcclusion ? 'ON' : 'OFF'}
+          </span>
+        </button>
 
         {/* Toggle 2: Store Glare Correction (OpenCV CLAHE) */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setClaheEnabled(!claheEnabled)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 border ${
-              claheEnabled
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-lg shadow-emerald-500/20'
-                : 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/10'
-            }`}
-          >
-            <Sliders className={`w-3.5 h-3.5 ${claheEnabled ? 'text-emerald-400' : 'text-slate-400'}`} />
-            <span>Store Glare Correction (CLAHE)</span>
-            <span className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-              claheEnabled ? 'bg-emerald-500 text-black' : 'bg-slate-700 text-slate-300'
-            }`}>
-              {claheEnabled ? 'ON' : 'OFF'}
-            </span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={handleToggleClahe}
+          className={`flex-1 sm:flex-none px-3 py-2 rounded-xl text-[11px] sm:text-xs font-mono font-semibold transition-all flex items-center justify-center sm:justify-start gap-2 border min-h-[42px] ${
+            claheEnabled
+              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-lg shadow-emerald-500/20'
+              : 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/10'
+          }`}
+          aria-label="Toggle OpenCV CLAHE Glare Correction"
+        >
+          <Sliders className={`w-3.5 h-3.5 flex-shrink-0 ${claheEnabled ? 'text-emerald-400' : 'text-slate-400'}`} />
+          <span>Glare Filter (CLAHE)</span>
+          <span className={`text-[9px] px-1.5 py-0.2 rounded font-bold ${
+            claheEnabled ? 'bg-emerald-500 text-black' : 'bg-slate-700 text-slate-300'
+          }`}>
+            {claheEnabled ? 'ON' : 'OFF'}
+          </span>
+        </button>
 
       </div>
 
-      {/* Item Library Palette (Click to Add to Counter) */}
-      <div className="p-3 bg-[#0B0F19] border-t border-white/5">
+      {/* Item Library Palette */}
+      <div className="p-3 bg-[#0B0F19] border-t border-white/5 w-full">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-            <Plus className="w-3 h-3 text-emerald-400" />
+          <span className="text-[10px] sm:text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <Plus className="w-3 h-3 text-emerald-400 flex-shrink-0" />
             Add Items to Counter
           </span>
           <span className="text-[10px] font-mono text-slate-400">
-            {counterItems.length}/6 On Counter
+            {counterItems.length}/6 Active
           </span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
@@ -360,13 +386,15 @@ export default function CameraFeed({
             return (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => onAddItem(item)}
                 disabled={alreadyOnCounter}
-                className={`p-2 rounded-xl text-left border transition-all flex flex-col justify-between h-20 relative ${
+                className={`p-2 rounded-xl text-left border transition-all flex flex-col justify-between h-20 relative min-h-[44px] ${
                   alreadyOnCounter
                     ? 'bg-white/5 border-white/5 opacity-50 cursor-not-allowed'
-                    : 'bg-[#111827] hover:bg-[#151F32] border-white/10 hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/10'
+                    : 'bg-[#111827] hover:bg-[#151F32] border-white/10 hover:border-emerald-500/40 hover:shadow-lg'
                 }`}
+                aria-label={`Add ${item.name} to checkout counter`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-lg">
@@ -405,24 +433,26 @@ export default function CameraFeed({
       {/* Real-Time OpenCV Telemetry Terminal Log Drawer */}
       <div className="bg-black/90 border-t border-white/10">
         <button
+          type="button"
           onClick={() => setShowLogs(!showLogs)}
-          className="w-full px-4 py-1.5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+          className="w-full px-3 sm:px-4 py-2 flex items-center justify-between text-left hover:bg-white/5 transition-colors min-h-[36px]"
+          aria-label="Toggle terminal logs drawer"
         >
           <div className="flex items-center gap-2">
-            <Terminal className="w-3 h-3 text-emerald-400" />
-            <span className="text-[10px] font-mono text-slate-300 uppercase tracking-wider">
+            <Terminal className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+            <span className="text-[10px] font-mono text-slate-300 uppercase tracking-wider truncate">
               OpenCV Edge Ingestion Stream (Live Console)
             </span>
           </div>
           {showLogs ? (
-            <ChevronDown className="w-3 h-3 text-slate-400" />
+            <ChevronDown className="w-3 h-3 text-slate-400 flex-shrink-0" />
           ) : (
-            <ChevronUp className="w-3 h-3 text-slate-400" />
+            <ChevronUp className="w-3 h-3 text-slate-400 flex-shrink-0" />
           )}
         </button>
 
         {showLogs && (
-          <div className="p-3 font-mono text-[10px] text-slate-300 space-y-1 max-h-24 overflow-y-auto border-t border-white/5 select-text bg-[#06080E]">
+          <div className="p-3 font-mono text-[9px] sm:text-[10px] text-slate-300 space-y-1 max-h-24 overflow-y-auto border-t border-white/5 select-text bg-[#06080E]">
             {cvLogs.map((log, i) => (
               <div 
                 key={i} 

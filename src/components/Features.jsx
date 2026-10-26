@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingCart, ShieldCheck, MapPin, CheckCircle2, ChevronRight, Zap, Eye, Database, ArrowRight } from 'lucide-react';
+import { ShoppingCart, ShieldCheck, MapPin, CheckCircle2, Zap } from 'lucide-react';
 
 export default function Features() {
   const [activePillar, setActivePillar] = useState(0);
@@ -65,67 +65,71 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="py-24 relative bg-[#090D16]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-20 sm:py-24 relative bg-[#090D16] w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-3">
             <Zap className="w-3.5 h-3.5" />
             <span>Core Architectural Capabilities</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-sans">
             Three Pillars of Autonomous Retail Intelligence
           </h2>
-          <p className="mt-4 text-slate-400 text-base leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-slate-400 text-xs sm:text-base leading-relaxed">
             Standardizing retail intelligence with edge computer vision and serverless cloud computing. No weight scales, no LiDAR rigs, zero friction.
           </p>
         </div>
 
         {/* 3 Pillars Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
               <div
                 key={pillar.id}
+                onClick={() => setActivePillar(idx)}
                 onMouseEnter={() => setActivePillar(idx)}
-                className={`relative rounded-3xl p-7 bg-[#0B0F19] border transition-all duration-300 flex flex-col justify-between group ${
+                className={`relative rounded-3xl p-6 sm:p-7 bg-[#0B0F19] border transition-all duration-300 flex flex-col justify-between group cursor-pointer w-full overflow-hidden ${
                   activePillar === idx
                     ? `${pillar.borderColor} shadow-2xl shadow-emerald-500/5 scale-[1.01]`
                     : 'border-white/10 hover:border-white/20'
                 }`}
+                role="button"
+                tabIndex={0}
+                aria-label={`View details for ${pillar.title}`}
               >
                 {/* Glow accent */}
-                <div className={`absolute top-0 right-0 w-44 h-44 rounded-full bg-gradient-to-br ${pillar.accentColor} blur-2xl pointer-events-none -z-10`}></div>
+                <div className={`absolute top-0 right-0 w-36 sm:w-44 h-36 sm:h-44 rounded-full bg-gradient-to-br ${pillar.accentColor} blur-2xl pointer-events-none -z-10`}></div>
 
                 <div>
                   {/* Top Badge & Icon */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 rounded-2xl bg-[#111827] border border-white/10 text-white group-hover:scale-110 transition-transform">
-                      <Icon className="w-6 h-6 text-emerald-400" />
+                  <div className="flex items-center justify-between mb-5 sm:mb-6">
+                    <div className="p-2.5 sm:p-3 rounded-2xl bg-[#111827] border border-white/10 text-white group-hover:scale-110 transition-transform">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
                     </div>
-                    <span className={`text-[10px] font-mono px-2.5 py-1 rounded-full border uppercase tracking-wider font-semibold ${pillar.badgeColor}`}>
+                    <span className={`text-[9px] sm:text-[10px] font-mono px-2.5 py-1 rounded-full border uppercase tracking-wider font-semibold ${pillar.badgeColor}`}>
                       {pillar.badge}
                     </span>
                   </div>
 
-                  <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">
+                  <span className="text-[11px] sm:text-xs font-mono text-slate-400 uppercase tracking-widest">
                     Pillar 0{idx + 1}
                   </span>
-                  <h3 className="text-xl font-bold text-white font-sans mt-1 mb-1 group-hover:text-emerald-300 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-white font-sans mt-1 mb-1 group-hover:text-emerald-300 transition-colors">
                     {pillar.title}
                   </h3>
-                  <div className="text-xs font-mono text-emerald-400 mb-4">
+                  <div className="text-xs font-mono text-emerald-400 mb-3 sm:mb-4">
                     {pillar.subtitle}
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5 sm:mb-6">
                     {pillar.description}
                   </p>
 
                   {/* Highlights checklist */}
-                  <ul className="space-y-2.5 mb-6 text-xs text-slate-300">
+                  <ul className="space-y-2 sm:space-y-2.5 mb-5 sm:mb-6 text-xs text-slate-300">
                     {pillar.highlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
@@ -136,7 +140,7 @@ export default function Features() {
                 </div>
 
                 {/* Micro Terminal Snippet */}
-                <div className="p-3 rounded-xl bg-[#06080E] border border-white/5 font-mono text-[10px] text-slate-400 overflow-x-auto">
+                <div className="p-3 rounded-xl bg-[#06080E] border border-white/5 font-mono text-[9px] sm:text-[10px] text-slate-400 overflow-x-auto w-full">
                   <div className="text-[9px] uppercase tracking-wider text-slate-500 mb-1 border-b border-white/5 pb-1 flex items-center justify-between">
                     <span>Edge Telemetry Trace</span>
                     <span className="text-emerald-500/80">Active</span>
