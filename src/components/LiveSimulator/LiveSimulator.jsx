@@ -9,19 +9,22 @@ import { CATALOG_ITEMS } from '../../data/mockData';
 export default function LiveSimulator({ onToast }) {
   const [activeTab, setActiveTab] = useState('EDGE_CHECKOUT'); // 'EDGE_CHECKOUT' or 'QUICKSIGHT_BI'
   
-  // Default 3 items on the counter
+  // Default 3 items on the counter with non-overlapping slot assignments
   const [counterItems, setCounterItems] = useState([
     {
       ...CATALOG_ITEMS[0],
-      position: { x: 45, y: 65 },
+      slot: 0,
+      position: { x: 50, y: 70 },
     },
     {
       ...CATALOG_ITEMS[1],
-      position: { x: 165, y: 60 },
+      slot: 1,
+      position: { x: 260, y: 70 },
     },
     {
       ...CATALOG_ITEMS[2],
-      position: { x: 95, y: 190 },
+      slot: 2,
+      position: { x: 50, y: 220 },
     }
   ]);
 
@@ -29,7 +32,7 @@ export default function LiveSimulator({ onToast }) {
   const [claheEnabled, setClaheEnabled] = useState(true);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
 
-  // Add an item to the counter
+  // Add an item to the counter with guaranteed unique slot
   const handleAddItem = (item) => {
     if (counterItems.some(i => i.id === item.id)) {
       if (onToast) {
@@ -45,17 +48,31 @@ export default function LiveSimulator({ onToast }) {
       return;
     }
     
-    const positions = [
-      { x: 45, y: 65 },
-      { x: 165, y: 60 },
-      { x: 95, y: 190 },
-      { x: 215, y: 175 },
-      { x: 265, y: 70 },
-      { x: 170, y: 200 },
+    // Find first available slot (0-5)
+    const usedSlots = new Set(counterItems.map(i => i.slot));
+    let nextSlot = 0;
+    for (let s = 0; s < 6; s++) {
+      if (!usedSlots.has(s)) {
+        nextSlot = s;
+        break;
+      }
+    }
+    
+    const slotPositions = [
+      { x: 50, y: 70 },
+      { x: 260, y: 70 },
+      { x: 470, y: 70 },
+      { x: 50, y: 220 },
+      { x: 260, y: 220 },
+      { x: 470, y: 220 },
     ];
     
-    const nextPos = positions[counterItems.length % positions.length];
-    setCounterItems([...counterItems, { ...item, position: nextPos }]);
+    setCounterItems([...counterItems, { 
+      ...item, 
+      slot: nextSlot,
+      position: slotPositions[nextSlot] || { x: 50, y: 70 }
+    }]);
+
     if (onToast) {
       onToast('success', 'Item Placed on Counter', `${item.name} detected with ${(item.confidence * 100).toFixed(1)}% OpenCV confidence.`);
     }
@@ -79,9 +96,9 @@ export default function LiveSimulator({ onToast }) {
 
   const handleResetDemo = () => {
     setCounterItems([
-      { ...CATALOG_ITEMS[0], position: { x: 45, y: 65 } },
-      { ...CATALOG_ITEMS[1], position: { x: 165, y: 60 } },
-      { ...CATALOG_ITEMS[2], position: { x: 95, y: 190 } },
+      { ...CATALOG_ITEMS[0], slot: 0, position: { x: 50, y: 70 } },
+      { ...CATALOG_ITEMS[1], slot: 1, position: { x: 260, y: 70 } },
+      { ...CATALOG_ITEMS[2], slot: 2, position: { x: 50, y: 220 } },
     ]);
     setHandOcclusion(false);
     setClaheEnabled(true);
