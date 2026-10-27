@@ -306,7 +306,7 @@ export default function CameraFeed({
                     {item.name}
                   </span>
                   <span className="text-[9px] sm:text-[10px] font-mono text-sky-300 font-bold">
-                    ${item.price.toFixed(2)}
+                    ₹{item.price.toFixed(2)}
                   </span>
                 </div>
 
@@ -452,7 +452,7 @@ export default function CameraFeed({
                     {item.icon === 'yogurt' && '🫐'}
                   </span>
                   <span className="text-[10px] font-mono font-bold text-sky-600">
-                    ${item.price.toFixed(2)}
+                    ₹{item.price.toFixed(2)}
                   </span>
                 </div>
                 <div>

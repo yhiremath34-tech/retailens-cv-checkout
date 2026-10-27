@@ -9,7 +9,7 @@ export default function EngineeringDeepDive({ onToast }) {
 
   const rawVideoEgress = (bandwidthCameraCount * 3.8).toFixed(1);
   const jsonMetadataEgress = (bandwidthCameraCount * 0.012).toFixed(2);
-  const costSavings = Math.round(bandwidthCameraCount * 75);
+  const costSavings = Math.round(bandwidthCameraCount * 6200);
 
   const handleToggleMemory = () => {
     const next = !toggleTrackingMemory;
@@ -144,7 +144,7 @@ export default function EngineeringDeepDive({ onToast }) {
                 Edge vs. Cloud Video Streaming
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                Continuous 4K/1080p RTSP cloud streaming saturates store uplinks and costs upwards of $1,200/mo per retail lane in AWS data transfer and GPU compute.
+                Continuous 4K/1080p RTSP cloud streaming saturates store uplinks and costs upwards of ₹98,000/mo per retail lane in AWS data transfer and GPU compute.
               </p>
 
               {/* Solution Description */}
@@ -181,7 +181,7 @@ export default function EngineeringDeepDive({ onToast }) {
                   </div>
                   <div className="pt-2 border-t border-sky-200 flex justify-between items-center text-slate-900 text-[11px] sm:text-xs">
                     <span>Est. Bandwidth Savings:</span>
-                    <span className="text-sky-700 font-bold font-sans">94.2% (~${costSavings}/mo)</span>
+                    <span className="text-sky-700 font-bold font-sans">94.2% (~₹{costSavings.toLocaleString('en-IN')}/mo)</span>
                   </div>
                 </div>
               </div>

@@ -105,18 +105,18 @@ export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
 
             {/* Clickable Email (White Glass Button) */}
             <a
-              href="mailto:architects@retailens.ai?subject=RetaiLens%20Autonomous%20Checkout%20Inquiry"
+              href="mailto:yhiremath34@gmail.com?subject=RetaiLens%20Autonomous%20Checkout%20Inquiry"
               className="glass-button p-2.5 rounded-xl hover:text-sky-700"
-              title="Email Engineering Team: architects@retailens.ai"
+              title="Email: yhiremath34@gmail.com"
             >
               <Mail className="w-4 h-4" />
             </a>
 
             {/* Clickable Phone (White Glass Button) */}
             <a
-              href="tel:+18005557382"
+              href="tel:+919071039454"
               className="glass-button p-2.5 rounded-xl hover:text-sky-700"
-              title="Call Autonomous Support: +1 (800) 555-7382"
+              title="Call: +91 9071039454"
             >
               <Phone className="w-4 h-4" />
             </a>
@@ -197,19 +197,19 @@ export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
             {/* Direct Contact Bar */}
             <div className="pt-3 border-t border-sky-100 space-y-2">
               <a
-                href="tel:+18005557382"
+                href="tel:+919071039454"
                 className="glass-button flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono font-bold"
               >
                 <Phone className="w-3.5 h-3.5 text-sky-600" />
-                <span>+1 (800) 555-RETAIL (Hotline)</span>
+                <span>+91 9071039454 (Hotline)</span>
               </a>
 
               <a
-                href="mailto:architects@retailens.ai?subject=RetaiLens%20Mobile%20Inquiry"
+                href="mailto:yhiremath34@gmail.com?subject=RetaiLens%20Mobile%20Inquiry"
                 className="glass-button flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono font-bold"
               >
                 <Mail className="w-3.5 h-3.5 text-sky-600" />
-                <span>architects@retailens.ai</span>
+                <span>yhiremath34@gmail.com</span>
               </a>
             </div>
 

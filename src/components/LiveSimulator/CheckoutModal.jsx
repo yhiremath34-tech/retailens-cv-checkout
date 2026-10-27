@@ -21,7 +21,7 @@ export default function CheckoutModal({ isOpen, onClose, items }) {
   if (!isOpen) return null;
 
   const subtotal = items.reduce((acc, i) => acc + i.price, 0);
-  const tax = subtotal * 0.0825;
+  const tax = subtotal * 0.05; // 5% GST
   const total = subtotal + tax;
   const txId = 'TX-AWS-' + Math.floor(100000 + Math.random() * 900000);
   const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -68,7 +68,7 @@ export default function CheckoutModal({ isOpen, onClose, items }) {
                   {item.name}
                 </span>
                 <span className="text-slate-900 font-bold">
-                  ${item.price.toFixed(2)}
+                  ₹{item.price.toFixed(2)}
                 </span>
               </div>
             ))}
@@ -77,15 +77,15 @@ export default function CheckoutModal({ isOpen, onClose, items }) {
           <div className="pt-2 border-t border-sky-100 space-y-1 text-slate-500 text-[11px]">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span className="font-bold text-slate-800">${subtotal.toFixed(2)}</span>
+              <span className="font-bold text-slate-800">₹{subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Tax (8.25%)</span>
-              <span className="font-bold text-slate-800">${tax.toFixed(2)}</span>
+              <span>GST (5%)</span>
+              <span className="font-bold text-slate-800">₹{tax.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-base font-bold text-slate-900 pt-1">
               <span>Total Paid</span>
-              <span className="text-sky-600">${total.toFixed(2)}</span>
+              <span className="text-sky-600">₹{total.toFixed(2)}</span>
             </div>
           </div>
         </div>

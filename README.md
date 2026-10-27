@@ -2,7 +2,7 @@
 
 > **OpenCV AI Competition 2026 Submission** • Powered by OpenCV Edge Vision & Serverless AWS Cloud Intelligence
 
-RetaiLens is an enterprise-grade autonomous retail checkout and store intelligence platform designed to eliminate checkout friction, prevent retail shrinkage, and deliver real-time operational analytics — **without requiring $50,000+ ceiling sensor arrays or custom load-cell shelf scales**.
+RetaiLens is an enterprise-grade autonomous retail checkout and store intelligence platform designed to eliminate checkout friction, prevent retail shrinkage, and deliver real-time operational analytics — **without requiring ₹40,00,000+ ceiling sensor arrays or custom load-cell shelf scales**.
 
 ---
 
@@ -13,7 +13,7 @@ RetaiLens is an enterprise-grade autonomous retail checkout and store intelligen
 | **Hardware Requirement** | Proprietary LiDAR matrices, load-cell shelf scales | **100% Standard Off-The-Shelf RGB Cameras** |
 | **Edge-to-Cloud Latency** | 650ms+ (Heavy cloud video streaming) | **< 18ms Edge Inference (OpenCV Centroid Tracker)** |
 | **Cloud Bandwidth** | 24.8 GB/hr raw 4K stream uploads | **1.4 MB/hr (94.2% Bandwidth Reduction via Edge MQTT)** |
-| **Operational Cloud Cost** | $1,200+/month in egress & GPU instances | **$0.0003 per transaction (Serverless DynamoDB & Lambda)** |
+| **Operational Cloud Cost** | ₹98,000+/month in egress & GPU instances | **₹0.02 per transaction (Serverless DynamoDB & Lambda)** |
 | **Loss Prevention** | Blind to occluded hand pass-arounds | **Geometric Hand-to-Item Tracking Heuristic** |
 | **Lighting Resilience** | Fails under specular glare on shiny plastic | **OpenCV CLAHE Adaptive Illumination Equalization** |
 
@@ -39,7 +39,7 @@ RetaiLens is an enterprise-grade autonomous retail checkout and store intelligen
   - Active Store Occupancy (42 Shoppers, +12% Peak Hour, 85 Max Capacity).
   - Avg Queue Dwell Time (8.4s, -78% vs legacy barcode scanners).
   - Edge Bandwidth Saved (94.2% reduction, 1.4 MB/hr metadata vs 24.8 GB/hr 4K stream).
-  - Shrinkage Prevented ($4,820 this month across 38 prevented sweethearting/occlusion events).
+  - Shrinkage Prevented (₹3,95,000 this month across 38 prevented sweethearting/occlusion events).
 - **Interactive Visual Store Layout Heatmap**:
   - Interactive floor plan with 5 distinct operational zones (Grab & Go Beverages, Bakery, Dairy, Produce, Autonomous Checkout Counters).
   - Click any zone to inspect active shopper counts, average dwell time, top-selling SKU, and traffic status.
@@ -115,3 +115,10 @@ RetaiLens is an enterprise-grade autonomous retail checkout and store intelligen
    ```bash
    npm run build
    ```
+
+---
+
+## 📞 Contact & Engineering Support
+- **Email**: [yhiremath34@gmail.com](mailto:yhiremath34@gmail.com)
+- **Phone / Hotline**: [+91 9071039454](tel:+919071039454)
+

@@ -112,7 +112,7 @@ export default function QuickSightDashboard({ onToast }) {
           </div>
           <div className="mt-2 text-[10px] sm:text-[11px] font-mono text-slate-500 flex justify-between">
             <span>Monthly Savings</span>
-            <span className="text-amber-700 font-bold font-mono">~$1,280/Store</span>
+            <span className="text-amber-700 font-bold font-mono">~₹1,05,000/Store</span>
           </div>
           <div className="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden border border-slate-200">
             <div className="bg-amber-500 h-full rounded-full" style={{ width: '94%' }}></div>
@@ -128,7 +128,7 @@ export default function QuickSightDashboard({ onToast }) {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">$4,820</span>
+            <span className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">₹3,95,000</span>
             <span className="text-xs font-mono text-emerald-600 font-bold">38 Flags</span>
           </div>
           <div className="mt-2 text-[10px] sm:text-[11px] font-mono text-slate-500 flex justify-between">

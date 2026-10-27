@@ -82,7 +82,7 @@ export default function Hero({ onLaunchSimulator, onExploreArchitecture }) {
                     High Capex & Fragile
                   </span>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-2 font-sans">$50,000+ Hardware Overhaul</h4>
+                <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-2 font-sans">₹40,00,000+ Hardware Overhaul</h4>
                 <p className="text-xs text-slate-600 leading-relaxed mb-4">
                   Requires ceiling-mounted LiDAR matrices, load-cell shelf scales, manual barcode scanning guns, and dedicated server racks.
                 </p>
@@ -128,7 +128,7 @@ export default function Hero({ onLaunchSimulator, onExploreArchitecture }) {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-sky-600 flex-shrink-0 mt-0.5" />
-                    <span><strong className="text-slate-900">$0.0003 cloud cost</strong> per customer checkout event</span>
+                    <span><strong className="text-slate-900">₹0.02 cloud cost</strong> per customer checkout event</span>
                   </li>
                 </ul>
               </div>

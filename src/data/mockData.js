@@ -1,10 +1,10 @@
-// Mock SKUs for the interactive checkout counter
+// Mock SKUs for the interactive checkout counter (Indian Retail Market INR Pricing)
 export const CATALOG_ITEMS = [
   {
     id: 'sku-01',
     name: 'Nitro Cold Brew Coffee',
     category: 'Beverages',
-    price: 3.79,
+    price: 149.00,
     sku: 'BEV-4421',
     confidence: 0.987,
     color: '#06B6D4', // cyan
@@ -19,7 +19,7 @@ export const CATALOG_ITEMS = [
     id: 'sku-02',
     name: 'Artisan Sourdough Bread',
     category: 'Bakery',
-    price: 5.99,
+    price: 199.00,
     sku: 'BRD-1029',
     confidence: 0.978,
     color: '#F59E0B', // amber
@@ -34,14 +34,14 @@ export const CATALOG_ITEMS = [
     id: 'sku-03',
     name: 'Organic Whole Milk',
     category: 'Dairy',
-    price: 4.49,
+    price: 75.00,
     sku: 'MLK-0842',
     confidence: 0.992,
     color: '#10B981', // emerald
     dimensions: { w: 95, h: 135 },
     icon: 'milk',
-    description: '64 fl oz pasture-raised organic milk carton',
-    weight: '1.9kg',
+    description: '1 Litre pasture-raised organic cow milk',
+    weight: '1.0kg',
     cvFeatures: ['Rectangular prism', 'High-key white mask', 'Green cap color peak'],
     initialPosition: { x: 120, y: 235 }
   },
@@ -49,13 +49,13 @@ export const CATALOG_ITEMS = [
     id: 'sku-04',
     name: 'Honey Almond Granola Cereal',
     category: 'Pantry',
-    price: 4.99,
+    price: 249.00,
     sku: 'CER-8831',
     confidence: 0.994,
     color: '#8B5CF6', // purple
     dimensions: { w: 120, h: 140 },
     icon: 'cereal',
-    description: '14 oz whole grain oats & toasted almonds',
+    description: '400g whole grain oats & roasted almonds',
     weight: '400g',
     cvFeatures: ['Box aspect ratio 1:1.4', 'Yellow saturation cluster', 'Corner Harris response'],
     initialPosition: { x: 270, y: 200 }
@@ -64,13 +64,13 @@ export const CATALOG_ITEMS = [
     id: 'sku-05',
     name: 'Organic Hass Avocado',
     category: 'Produce',
-    price: 1.89,
+    price: 89.00,
     sku: 'PRD-3301',
     confidence: 0.965,
     color: '#84CC16', // lime
     dimensions: { w: 80, h: 80 },
     icon: 'avocado',
-    description: 'Ripe Hass avocado (Single item)',
+    description: 'Fresh Hass avocado (Single item)',
     weight: '170g',
     cvFeatures: ['Pebbled skin texture', 'Dark emerald HSV threshold', 'Convex hull index 0.94'],
     initialPosition: { x: 190, y: 155 }
@@ -79,13 +79,13 @@ export const CATALOG_ITEMS = [
     id: 'sku-06',
     name: 'Organic Greek Yogurt',
     category: 'Dairy',
-    price: 2.29,
+    price: 65.00,
     sku: 'YOG-7740',
     confidence: 0.982,
     color: '#38BDF8', // sky blue
     dimensions: { w: 85, h: 85 },
     icon: 'yogurt',
-    description: '5.3 oz non-fat plain strained yogurt',
+    description: '150g natural high-protein strained yogurt',
     weight: '150g',
     cvFeatures: ['Circular top profile', 'White plastic reflection', 'Foil seal centroid'],
     initialPosition: { x: 380, y: 120 }
@@ -211,7 +211,7 @@ def lambda_handler(event, context):
     return {"statusCode": 200}`,
     telemetryMetrics: {
       latency: '65 ms',
-      costPerTx: '$0.0003',
+      costPerTx: '₹0.02',
       storage: 'DynamoDB On-Demand',
       slaAvailability: '99.99%'
     }
@@ -236,13 +236,13 @@ SELECT
     COUNT(DISTINCT session_id) AS total_shoppers,
     AVG(dwell_seconds) AS avg_dwell_time,
     SUM(CASE WHEN shrinkage_flag = 1 THEN 1 ELSE 0 END) AS alert_count,
-    ROUND(SUM(cart_total_usd), 2) AS gross_merchandise_value
+    ROUND(SUM(cart_total_inr), 2) AS gross_merchandise_value
 FROM "retail_data_lake"."checkout_telemetry"
 WHERE dt = CURRENT_DATE
 GROUP BY zone_id
 ORDER BY gross_merchandise_value DESC;`,
     telemetryMetrics: {
-      storageCost: '$0.023/GB-mo',
+      storageCost: '₹1.90/GB-mo',
       queryEngine: 'Athena + QuickSight',
       freshness: '< 60 sec',
       dashboards: 'Executive & Store Mgr'
@@ -272,7 +272,7 @@ export const ENGINEERING_CHALLENGES = [
     category: 'Distributed System Architecture',
     icon: 'wifi-off',
     tag: 'Edge Filtering (94% Savings)',
-    problem: 'Streaming 1080p 60fps raw video streams from 16 store cameras to AWS for cloud computer vision requires over 380 Mbps upstream bandwidth and incurs $1,200+/month in egress costs per store.',
+    problem: 'Streaming 1080p 60fps raw video streams from 16 store cameras to AWS for cloud computer vision requires over 380 Mbps upstream bandwidth and incurs ₹98,000+/month in egress costs per store.',
     solution: 'Offloaded full image ingestion, background subtraction, and object bounding box proposal to local edge compute (e.g. Raspberry Pi 5 / Jetson). Only 1.2 KB JSON telemetry packets are emitted to AWS IoT Core over MQTT QoS 1.',
     benchmark: {
       before: '24.8 GB/hour raw video bandwidth',
@@ -348,7 +348,7 @@ export const STORE_ZONES = [
     occupancy: 4,
     avgDwell: '11s',
     heatIndex: 94,
-    popularItem: 'Avg Transaction: $18.40',
+    popularItem: 'Avg Transaction: ₹423',
     status: 'Optimal Flow (< 12s)',
     coordinates: { x: '60%', y: '58%', w: '32%', h: '32%' },
     color: '#8B5CF6'
@@ -365,7 +365,7 @@ export const SAMPLE_MQTT_EVENTS = [
     payload: {
       event_type: 'ITEM_TRACKED',
       device_id: 'edge-cam-lane01-overhead',
-      store_id: 'austin-hub-04',
+      store_id: 'bengaluru-hub-04',
       fps: 58.7,
       edge_latency_ms: 17.6,
       item: {
@@ -388,7 +388,7 @@ export const SAMPLE_MQTT_EVENTS = [
     payload: {
       event_type: 'ITEM_TRACKED',
       device_id: 'edge-cam-lane01-overhead',
-      store_id: 'austin-hub-04',
+      store_id: 'bengaluru-hub-04',
       fps: 59.1,
       edge_latency_ms: 18.2,
       item: {
@@ -434,7 +434,7 @@ export const SAMPLE_MQTT_EVENTS = [
       lane_id: 'lane-01',
       shopper_dwell_ms: 8420,
       item_count: 3,
-      gross_total_usd: 14.27,
+      gross_total_inr: 423.00,
       verified_by_cv: true,
       shrinkage_risk_score: 0.02,
       dynamodb_write_ms: 4.8

@@ -61,10 +61,10 @@ export default function Footer({ onNavigateToSimulator, onOpenNotFound }) {
                 <Phone className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
                 <span className="text-slate-500 font-semibold">Hotline:</span>
                 <a 
-                  href="tel:+18005557382" 
+                  href="tel:+919071039454" 
                   className="text-slate-800 hover:text-sky-600 transition-colors underline decoration-sky-300 hover:decoration-sky-600 font-medium"
                 >
-                  +1 (800) 555-RETAIL
+                  +91 9071039454
                 </a>
               </div>
 
@@ -72,10 +72,10 @@ export default function Footer({ onNavigateToSimulator, onOpenNotFound }) {
                 <Mail className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
                 <span className="text-slate-500 font-semibold">Engineering:</span>
                 <a 
-                  href="mailto:architects@retailens.ai?subject=RetaiLens%20Autonomous%20Checkout%20Inquiry" 
+                  href="mailto:yhiremath34@gmail.com?subject=RetaiLens%20Autonomous%20Checkout%20Inquiry" 
                   className="text-slate-800 hover:text-sky-600 transition-colors underline decoration-sky-300 hover:decoration-sky-600 font-medium"
                 >
-                  architects@retailens.ai
+                  yhiremath34@gmail.com
                 </a>
               </div>
             </div>

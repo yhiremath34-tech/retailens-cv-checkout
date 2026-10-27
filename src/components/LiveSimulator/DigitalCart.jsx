@@ -10,7 +10,7 @@ export default function DigitalCart({
   onToast,
 }) {
   const subtotal = counterItems.reduce((acc, item) => acc + item.price, 0);
-  const tax = subtotal * 0.0825;
+  const tax = subtotal * 0.05; // 5% GST
   const total = subtotal + tax;
 
   const handleResolveAlert = () => {
@@ -167,7 +167,7 @@ export default function DigitalCart({
 
                   <div className="text-right flex-shrink-0">
                     <span className="text-xs sm:text-sm font-bold font-mono text-sky-700">
-                      ${item.price.toFixed(2)}
+                      ₹{item.price.toFixed(2)}
                     </span>
                     <div className="text-[8px] sm:text-[9px] font-mono text-emerald-600 font-bold flex items-center justify-end gap-0.5">
                       <Check className="w-2.5 h-2.5" /> CV Synced
@@ -195,15 +195,15 @@ export default function DigitalCart({
         <div className="space-y-1.5 font-mono text-xs">
           <div className="flex justify-between text-slate-600 text-[11px] sm:text-xs">
             <span>Subtotal</span>
-            <span className="font-bold text-slate-900">${subtotal.toFixed(2)}</span>
+            <span className="font-bold text-slate-900">₹{subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-slate-600 text-[11px] sm:text-xs">
-            <span>Estimated Sales Tax (8.25%)</span>
-            <span className="font-bold text-slate-900">${tax.toFixed(2)}</span>
+            <span>Estimated GST (5%)</span>
+            <span className="font-bold text-slate-900">₹{tax.toFixed(2)}</span>
           </div>
           <div className="pt-2 border-t border-sky-100 flex justify-between text-sm sm:text-base font-bold text-slate-900">
             <span className="font-sans">Total Amount</span>
-            <span className="text-sky-600 text-lg sm:text-xl font-mono">${total.toFixed(2)}</span>
+            <span className="text-sky-600 text-lg sm:text-xl font-mono">₹{total.toFixed(2)}</span>
           </div>
         </div>
 

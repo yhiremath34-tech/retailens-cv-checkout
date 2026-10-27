@@ -12,7 +12,7 @@ export default function ImpactBanner() {
       bgGlow: 'from-emerald-500/20 to-transparent'
     },
     {
-      metric: '$0.0003',
+      metric: '₹0.02',
       label: 'Cloud Cost Per Transaction',
       detail: 'Serverless AWS Lambda + DynamoDB On-Demand',
       icon: DollarSign,

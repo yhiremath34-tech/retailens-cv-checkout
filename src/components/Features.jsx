@@ -22,7 +22,7 @@ export default function Features() {
       borderColor: 'border-sky-300',
       terminalSnippet: `[CV_EDGE] Detected: "Nitro Cold Brew" (SKU: BEV-4421)
 [CENTROID] Object ID #1 locked at (184, 142) | conf: 98.7%
-[DYNAMODB] PutItem -> Session Cart: cart_88391 (+ $3.79)`
+[DYNAMODB] PutItem -> Session Cart: cart_88391 (+ ₹149.00)`
     },
     {
       id: 'pillar-2',
