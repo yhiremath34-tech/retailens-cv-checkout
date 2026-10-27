@@ -306,8 +306,9 @@ export const STORE_ZONES = [
     heatIndex: 88,
     popularItem: 'Nitro Cold Brew Coffee',
     status: 'High Traffic',
-    coordinates: { x: '12%', y: '18%', w: '26%', h: '34%' },
-    color: '#06B6D4'
+    coordinates: { x: '6%', y: '15%', w: '28%', h: '39%' },
+    color: '#06B6D4',
+    image: '/images/zones/cold-beverages.jpg'
   },
   {
     id: 'zone-bakery',
@@ -317,8 +318,9 @@ export const STORE_ZONES = [
     heatIndex: 65,
     popularItem: 'Sourdough Loaf',
     status: 'Moderate',
-    coordinates: { x: '42%', y: '18%', w: '24%', h: '34%' },
-    color: '#F59E0B'
+    coordinates: { x: '37%', y: '15%', w: '27%', h: '39%' },
+    color: '#F59E0B',
+    image: '/images/zones/artisan-bakery.jpg'
   },
   {
     id: 'zone-dairy',
@@ -328,8 +330,9 @@ export const STORE_ZONES = [
     heatIndex: 82,
     popularItem: 'Organic Whole Milk',
     status: 'Peak Demand',
-    coordinates: { x: '70%', y: '18%', w: '22%', h: '34%' },
-    color: '#10B981'
+    coordinates: { x: '67%', y: '15%', w: '27%', h: '39%' },
+    color: '#10B981',
+    image: '/images/zones/dairy-milk.jpg'
   },
   {
     id: 'zone-produce',
@@ -339,8 +342,9 @@ export const STORE_ZONES = [
     heatIndex: 71,
     popularItem: 'Hass Avocado',
     status: 'High Engagement',
-    coordinates: { x: '12%', y: '58%', w: '44%', h: '32%' },
-    color: '#84CC16'
+    coordinates: { x: '6%', y: '57%', w: '44%', h: '39%' },
+    color: '#84CC16',
+    image: '/images/zones/fresh-produce.jpg'
   },
   {
     id: 'zone-checkout',
@@ -350,8 +354,9 @@ export const STORE_ZONES = [
     heatIndex: 94,
     popularItem: 'Avg Transaction: ₹423',
     status: 'Optimal Flow (< 12s)',
-    coordinates: { x: '60%', y: '58%', w: '32%', h: '32%' },
-    color: '#8B5CF6'
+    coordinates: { x: '54%', y: '57%', w: '40%', h: '39%' },
+    color: '#8B5CF6',
+    image: '/images/zones/cv-checkout.jpg'
   }
 ];
 

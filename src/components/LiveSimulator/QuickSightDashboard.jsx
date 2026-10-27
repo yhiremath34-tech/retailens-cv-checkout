@@ -170,13 +170,13 @@ export default function QuickSightDashboard({ onToast }) {
             </div>
 
             {/* Interactive Floor Plan Diagram */}
-            <div className="relative w-full h-72 sm:h-80 rounded-2xl bg-gradient-to-br from-sky-50/60 to-slate-50 border border-sky-100 overflow-hidden p-2 sm:p-3 bg-grid-pattern">
+            <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl bg-gradient-to-br from-sky-50/60 to-slate-50 border border-sky-100 overflow-hidden p-2 sm:p-3 bg-grid-pattern">
               
               {/* Store Entrance / Exit Marks */}
-              <div className="absolute top-2 left-3 sm:left-6 px-2.5 sm:px-3 py-1 rounded-lg bg-white/90 text-[8px] sm:text-[9px] font-mono font-bold text-slate-600 uppercase border border-sky-200 shadow-sm">
+              <div className="absolute top-2 left-3 sm:left-6 px-2.5 sm:px-3 py-1 rounded-lg bg-white/90 text-[8px] sm:text-[9px] font-mono font-bold text-slate-600 uppercase border border-sky-200 shadow-sm z-10">
                 Entrance Turnstile ⬇
               </div>
-              <div className="absolute top-2 right-3 sm:right-6 px-2.5 sm:px-3 py-1 rounded-lg bg-white/90 text-[8px] sm:text-[9px] font-mono font-bold text-slate-600 uppercase border border-sky-200 shadow-sm">
+              <div className="absolute top-2 right-3 sm:right-6 px-2.5 sm:px-3 py-1 rounded-lg bg-white/90 text-[8px] sm:text-[9px] font-mono font-bold text-slate-600 uppercase border border-sky-200 shadow-sm z-10">
                 Fast Exit Gate ⬆
               </div>
 
@@ -192,10 +192,10 @@ export default function QuickSightDashboard({ onToast }) {
                         onToast('info', `Zone Selected: ${zone.name}`, `Occupancy: ${zone.occupancy} | Heat Index: ${zone.heatIndex}% | Dwell: ${zone.avgDwell}`);
                       }
                     }}
-                    className={`absolute rounded-2xl cursor-pointer p-2.5 sm:p-3 transition-all duration-200 border flex flex-col justify-between ${
+                    className={`absolute rounded-2xl cursor-pointer p-2 sm:p-2.5 transition-all duration-200 border flex flex-col justify-between overflow-hidden group ${
                       isSelected
-                        ? 'border-2 border-sky-600 shadow-[0_4px_20px_rgba(2,132,199,0.25)] z-20 scale-[1.02] bg-white'
-                        : 'border-sky-200/80 hover:border-sky-400 bg-white/80 hover:bg-white z-10 shadow-sm'
+                        ? 'border-2 border-sky-600 shadow-[0_6px_25px_rgba(2,132,199,0.3)] z-20 scale-[1.02] bg-white ring-2 ring-sky-400/30'
+                        : 'border-sky-200/80 hover:border-sky-400 bg-white/95 hover:bg-white z-10 shadow-sm hover:scale-[1.01]'
                     }`}
                     style={{
                       left: zone.coordinates.x,
@@ -207,26 +207,43 @@ export default function QuickSightDashboard({ onToast }) {
                     tabIndex={0}
                     aria-label={`Inspect zone ${zone.name}`}
                   >
-                    <div className="flex items-start justify-between">
-                      <span className="text-[10px] sm:text-[11px] font-bold text-slate-900 font-sans leading-tight line-clamp-1">
+                    {/* Top Header: Zone Name & Heat Index */}
+                    <div className="flex items-start justify-between gap-1 z-10">
+                      <span className="text-[10px] sm:text-[11px] font-bold text-slate-900 font-sans leading-tight line-clamp-1 group-hover:text-sky-700 transition-colors">
                         {zone.name}
                       </span>
                       <span 
-                        className="text-[8px] sm:text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap"
+                        className="text-[8px] sm:text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-xs flex-shrink-0"
                         style={{ backgroundColor: `${zone.color}20`, color: zone.color }}
                       >
                         {zone.heatIndex}%
                       </span>
                     </div>
 
-                    <div className="flex items-end justify-between font-mono text-[9px] sm:text-[10px] text-slate-600">
+                    {/* Zone Photo in Box */}
+                    <div className="relative my-1 w-full flex-1 min-h-[50px] rounded-xl overflow-hidden border border-slate-200/60 shadow-inner group/photo">
+                      <img 
+                        src={zone.image} 
+                        alt={zone.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity pointer-events-none" />
+                      <div className="absolute bottom-1 left-1.5 px-1.5 py-0.2 rounded bg-black/60 backdrop-blur-xs text-[8px] sm:text-[9px] font-mono font-bold text-white flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: zone.color }}></span>
+                        <span>{zone.status.split(' ')[0]}</span>
+                      </div>
+                    </div>
+
+                    {/* Bottom Telemetry: Shoppers & Dwell */}
+                    <div className="flex items-end justify-between font-mono text-[9px] sm:text-[10px] text-slate-600 z-10 pt-0.5">
                       <div>
                         <span className="text-slate-400 hidden xs:inline">Shoppers: </span>
-                        <strong className="text-slate-900">{zone.occupancy}</strong>
+                        <strong className="text-slate-900 font-bold">{zone.occupancy}</strong>
                       </div>
                       <div>
                         <span className="text-slate-400 hidden xs:inline">Dwell: </span>
-                        <strong className="text-slate-900">{zone.avgDwell}</strong>
+                        <strong className="text-slate-900 font-bold">{zone.avgDwell}</strong>
                       </div>
                     </div>
                   </div>
@@ -236,20 +253,41 @@ export default function QuickSightDashboard({ onToast }) {
             </div>
           </div>
 
-          {/* Selected Zone Details (White Glass) */}
-          <div className="mt-4 p-3.5 rounded-2xl bg-sky-50/80 border border-sky-100 flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold">Active Zone Telemetry</span>
-              <h5 className="text-xs sm:text-sm font-bold text-slate-900 font-sans">{selectedZone.name}</h5>
-            </div>
-            <div className="flex flex-wrap items-center gap-3 text-[11px] sm:text-xs font-mono">
+          {/* Selected Zone Details with Photo (White Glass) */}
+          <div className="mt-4 p-3.5 sm:p-4 rounded-2xl bg-sky-50/80 border border-sky-100 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+            <div className="flex items-center gap-3">
+              {selectedZone.image && (
+                <img 
+                  src={selectedZone.image} 
+                  alt={selectedZone.name} 
+                  className="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-xl border-2 border-white shadow-md flex-shrink-0"
+                />
+              )}
               <div>
-                <span className="text-slate-500 text-[10px]">Top SKU: </span>
-                <span className="text-sky-700 font-bold">{selectedZone.popularItem}</span>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold">Active Zone Telemetry</span>
+                  <span 
+                    className="text-[8px] font-mono font-bold px-1.5 py-0.2 rounded-full"
+                    style={{ backgroundColor: `${selectedZone.color}25`, color: selectedZone.color }}
+                  >
+                    Heat Index: {selectedZone.heatIndex}%
+                  </span>
+                </div>
+                <h5 className="text-xs sm:text-sm font-bold text-slate-900 font-sans">{selectedZone.name}</h5>
               </div>
-              <div>
-                <span className="text-slate-500 text-[10px]">Traffic: </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] sm:text-xs font-mono">
+              <div className="bg-white/90 px-2.5 py-1.5 rounded-xl border border-sky-100">
+                <span className="text-slate-400 text-[9px] block">Top SKU</span>
+                <span className="text-sky-700 font-bold truncate max-w-[140px] block">{selectedZone.popularItem}</span>
+              </div>
+              <div className="bg-white/90 px-2.5 py-1.5 rounded-xl border border-sky-100">
+                <span className="text-slate-400 text-[9px] block">Traffic</span>
                 <span className="text-emerald-700 font-bold">{selectedZone.status}</span>
+              </div>
+              <div className="bg-white/90 px-2.5 py-1.5 rounded-xl border border-sky-100">
+                <span className="text-slate-400 text-[9px] block">Avg Dwell</span>
+                <span className="text-slate-900 font-bold">{selectedZone.avgDwell}</span>
               </div>
             </div>
           </div>
