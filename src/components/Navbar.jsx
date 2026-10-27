@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Camera, ChevronRight, Activity, Layers, ShieldCheck, Terminal, Phone, Mail, X, Menu, ExternalLink, HelpCircle } from 'lucide-react';
+import { Camera, ChevronRight, Activity, Layers, ShieldCheck, Terminal, Phone, Mail, X, Menu, ExternalLink, HelpCircle, Sparkles } from 'lucide-react';
 
 export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
   const [scrolled, setScrolled] = useState(false);
@@ -46,9 +46,9 @@ export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
       scrolled 
-        ? 'bg-[#090D16]/95 backdrop-blur-md border-b border-white/10 shadow-2xl shadow-black/50 py-3' 
+        ? 'bg-white/85 backdrop-blur-md border-b border-sky-100 shadow-md shadow-sky-500/5 py-3' 
         : 'bg-transparent py-4 sm:py-5'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,72 +61,72 @@ export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
             className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer"
             title="RetaiLens CV - Return to top"
           >
-            <div className="relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 via-cyan-500/20 to-emerald-500/10 border border-emerald-500/40 shadow-lg shadow-emerald-500/10 group-hover:border-emerald-400 transition-colors">
-              <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cyan-400 rounded-full border-2 border-[#090D16] animate-pulse"></div>
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-2xl bg-white border border-sky-200/80 shadow-md shadow-sky-500/10 group-hover:border-sky-400 group-hover:scale-105 transition-all">
+              <Camera className="w-5 h-5 text-sky-600" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white animate-pulse"></div>
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-base sm:text-lg tracking-tight text-white group-hover:text-emerald-300 transition-colors font-sans">
-                  RetaiLens<span className="text-emerald-400">.cv</span>
+                <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors font-sans">
+                  RetaiLens<span className="text-sky-600">.cv</span>
                 </span>
-                <span className="text-[9px] uppercase font-mono tracking-widest px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="text-[9px] uppercase font-mono font-bold tracking-widest px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-700 border border-sky-200">
                   AI Edge
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-slate-400 hidden xs:inline">OpenCV + AWS Serverless</span>
+              <span className="text-[10px] font-mono text-slate-500 hidden xs:inline">OpenCV + AWS Serverless</span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#111827]/70 p-1.5 rounded-full border border-white/5 backdrop-blur-sm">
+          <nav className="hidden lg:flex items-center gap-1 bg-white/70 p-1.5 rounded-full border border-sky-100/80 shadow-sm backdrop-blur-md">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                className="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-sky-600 hover:bg-sky-50/80 rounded-full transition-all"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Desktop Right Actions: Telemetry + Contact + CTA */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Desktop Right Actions: White Glass Buttons with Light Blue Color */}
+          <div className="hidden sm:flex items-center gap-2.5">
             
             {/* Live Edge Telemetry Status */}
-            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>Edge Node Online</span>
-              <span className="text-emerald-500/40">|</span>
-              <span className="text-slate-400">18ms</span>
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-sky-200/80 text-sky-700 text-xs font-mono shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+              <span className="font-bold">Edge Node Online</span>
+              <span className="text-sky-300">|</span>
+              <span className="text-slate-500">18ms</span>
             </div>
 
-            {/* Clickable Email */}
+            {/* Clickable Email (White Glass Button) */}
             <a
               href="mailto:architects@retailens.ai?subject=RetaiLens%20Autonomous%20Checkout%20Inquiry"
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 border border-white/10 transition-colors"
+              className="glass-button p-2.5 rounded-xl hover:text-sky-700"
               title="Email Engineering Team: architects@retailens.ai"
             >
               <Mail className="w-4 h-4" />
             </a>
 
-            {/* Clickable Phone Number */}
+            {/* Clickable Phone (White Glass Button) */}
             <a
               href="tel:+18005557382"
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 border border-white/10 transition-colors"
+              className="glass-button p-2.5 rounded-xl hover:text-sky-700"
               title="Call Autonomous Support: +1 (800) 555-7382"
             >
               <Phone className="w-4 h-4" />
             </a>
 
-            {/* GitHub Demo Button */}
+            {/* GitHub Demo Button (White Glass Button) */}
             <a 
               href="https://github.com/yhiremath34-tech/retailens-cv-checkout" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 border border-white/10 transition-colors"
+              className="glass-button p-2.5 rounded-xl hover:text-sky-700"
               title="View GitHub Repository"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -134,48 +134,50 @@ export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
               </svg>
             </a>
 
-            {/* Launch Simulator CTA */}
+            {/* Launch Simulator CTA (White Glass Button with Light Blue Accent) */}
             <button
+              type="button"
               onClick={() => {
                 const el = document.querySelector('#simulator');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
                 if (onNavigateToSimulator) onNavigateToSimulator();
               }}
-              className="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-black bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0"
+              className="glass-button-primary inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold"
             >
-              <Terminal className="w-3.5 h-3.5 text-black" />
+              <Terminal className="w-3.5 h-3.5 text-sky-600" />
               <span>Try Simulator</span>
-              <ChevronRight className="w-3 h-3 text-black/70" />
+              <ChevronRight className="w-3 h-3 text-sky-400" />
             </button>
           </div>
 
           {/* Mobile hamburger menu toggle */}
           <div className="flex sm:hidden items-center gap-2">
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="glass-button p-2.5 rounded-xl min-h-[44px] min-w-[44px] flex items-center justify-center text-sky-600"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-5 h-5 text-white" />
+                <X className="w-5 h-5 text-slate-800" />
               ) : (
-                <Menu className="w-5 h-5 text-white" />
+                <Menu className="w-5 h-5 text-slate-800" />
               )}
             </button>
           </div>
         </div>
 
-        {/* Enhanced Mobile Slide-Down Menu Drawer */}
+        {/* Mobile Slide-Down Menu Drawer (White Glass) */}
         {mobileMenuOpen && (
-          <div className="sm:hidden mt-3 p-5 rounded-2xl bg-[#0D131F]/98 border border-white/10 shadow-2xl backdrop-blur-2xl space-y-4 animate-slide-up">
+          <div className="sm:hidden mt-3 p-5 rounded-3xl bg-white/95 border border-sky-100 shadow-2xl backdrop-blur-2xl space-y-4 animate-slide-up">
             
             {/* Live Edge Telemetry Status */}
-            <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+            <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-sky-50 border border-sky-200/80 text-sky-700 text-xs font-mono">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>Edge Node #04 Online</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span className="font-bold">Edge Node #04 Online</span>
               </div>
-              <span className="text-slate-400">&lt; 18ms</span>
+              <span className="text-slate-500 font-bold">&lt; 18ms</span>
             </div>
 
             {/* Navigation links */}
@@ -185,55 +187,57 @@ export default function Navbar({ onNavigateToSimulator, onOpenNotFound }) {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-white hover:bg-white/5 transition-colors"
+                  className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:text-sky-600 hover:bg-sky-50 transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
             </div>
 
-            {/* Direct Contact Bar (Clickable Phone & Email) */}
-            <div className="pt-3 border-t border-white/10 space-y-2">
+            {/* Direct Contact Bar */}
+            <div className="pt-3 border-t border-sky-100 space-y-2">
               <a
                 href="tel:+18005557382"
-                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+                className="glass-button flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono font-bold"
               >
-                <Phone className="w-3.5 h-3.5" />
+                <Phone className="w-3.5 h-3.5 text-sky-600" />
                 <span>+1 (800) 555-RETAIL (Hotline)</span>
               </a>
 
               <a
                 href="mailto:architects@retailens.ai?subject=RetaiLens%20Mobile%20Inquiry"
-                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 hover:bg-cyan-500/20 transition-colors"
+                className="glass-button flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono font-bold"
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3.5 h-3.5 text-sky-600" />
                 <span>architects@retailens.ai</span>
               </a>
             </div>
 
             {/* Action buttons */}
-            <div className="pt-2 border-t border-white/10 space-y-2">
+            <div className="pt-2 border-t border-sky-100 space-y-2">
               <button
+                type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   const el = document.querySelector('#simulator');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                   if (onNavigateToSimulator) onNavigateToSimulator();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-emerald-400 to-cyan-400 shadow-lg shadow-emerald-500/20"
+                className="glass-button-primary w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold"
               >
-                <Terminal className="w-4 h-4 text-black" />
+                <Terminal className="w-4 h-4 text-sky-600" />
                 <span>Launch Interactive Terminal</span>
               </button>
 
               <button
+                type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   if (onOpenNotFound) onOpenNotFound();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-mono text-slate-400 hover:text-white bg-white/5 border border-white/10 transition-colors"
+                className="glass-button w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-mono text-slate-500 hover:text-rose-600"
               >
-                <HelpCircle className="w-3.5 h-3.5 text-rose-400" />
+                <HelpCircle className="w-3.5 h-3.5 text-rose-500" />
                 <span>Simulate 404 Missing Route</span>
               </button>
             </div>

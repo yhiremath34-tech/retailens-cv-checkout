@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import EntryLoader from './components/EntryLoader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import LiveSimulator from './components/LiveSimulator/LiveSimulator';
@@ -12,6 +13,7 @@ import Toast from './components/Toast';
 import NotFoundPage from './components/NotFoundPage';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [toasts, setToasts] = useState([]);
   const [show404, setShow404] = useState(false);
 
@@ -54,7 +56,7 @@ export default function App() {
   // If 404 view is active, render custom 404 view
   if (show404) {
     return (
-      <div className="min-h-screen bg-[#090D16] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 w-full max-w-full overflow-x-hidden">
+      <div className="min-h-screen bg-[#F0F7FF] text-slate-900 flex flex-col font-sans selection:bg-sky-200 selection:text-sky-900 w-full max-w-full overflow-x-hidden">
         <NotFoundPage onReturnHome={() => setShow404(false)} />
         <Toast toasts={toasts} onDismiss={dismissToast} />
       </div>
@@ -62,7 +64,15 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#090D16] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-300 w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen bg-[#F0F7FF] text-slate-900 flex flex-col font-sans selection:bg-sky-200 selection:text-sky-900 w-full max-w-full overflow-x-hidden">
+      {/* High-Tech Edge Camera Entry Load Animation */}
+      {isLoading && (
+        <EntryLoader onFinish={() => {
+          setIsLoading(false);
+          addToast('success', 'Terminal Online', 'OpenCV 4.10 Centroid Tracker calibrated & ready.');
+        }} />
+      )}
+
       {/* Sticky Navigation */}
       <Navbar 
         onNavigateToSimulator={scrollToSimulator} 

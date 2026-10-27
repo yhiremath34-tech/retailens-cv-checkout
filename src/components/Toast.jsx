@@ -14,37 +14,37 @@ export default function Toast({ toasts, onDismiss }) {
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto p-3.5 rounded-2xl border shadow-2xl backdrop-blur-xl flex items-start gap-3 transition-all duration-300 transform translate-y-0 animate-slide-up ${
+            className={`pointer-events-auto p-3.5 rounded-2xl border shadow-xl backdrop-blur-xl flex items-start gap-3 transition-all duration-300 transform translate-y-0 animate-slide-up bg-white/95 ${
               isSuccess
-                ? 'bg-[#0B1713]/95 border-emerald-500/40 text-emerald-200 shadow-emerald-500/10'
+                ? 'border-emerald-500/50 text-emerald-950 shadow-emerald-500/10'
                 : isError
-                ? 'bg-[#1F0C0F]/95 border-rose-500/40 text-rose-200 shadow-rose-500/10'
+                ? 'border-rose-500/50 text-rose-950 shadow-rose-500/10'
                 : isWarning
-                ? 'bg-[#1A1407]/95 border-amber-500/40 text-amber-200 shadow-amber-500/10'
-                : 'bg-[#111827]/95 border-white/20 text-slate-200'
+                ? 'border-amber-500/50 text-amber-950 shadow-amber-500/10'
+                : 'border-sky-300 text-slate-900 shadow-sky-500/10'
             }`}
           >
             <div className="mt-0.5 flex-shrink-0">
-              {isSuccess && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-              {isError && <XCircle className="w-4 h-4 text-rose-400" />}
-              {isWarning && <AlertTriangle className="w-4 h-4 text-amber-400 animate-pulse" />}
-              {!isSuccess && !isError && !isWarning && <Info className="w-4 h-4 text-cyan-400" />}
+              {isSuccess && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
+              {isError && <XCircle className="w-4 h-4 text-rose-600" />}
+              {isWarning && <AlertTriangle className="w-4 h-4 text-amber-600 animate-pulse" />}
+              {!isSuccess && !isError && !isWarning && <Info className="w-4 h-4 text-sky-600" />}
             </div>
 
             <div className="flex-1">
               {toast.title && (
-                <div className="text-xs font-bold font-sans tracking-tight">
+                <div className="text-xs font-bold font-sans tracking-tight text-slate-900">
                   {toast.title}
                 </div>
               )}
-              <div className="text-[11px] font-mono opacity-90 leading-relaxed mt-0.5">
+              <div className="text-[11px] font-mono leading-relaxed mt-0.5 text-slate-700">
                 {toast.message}
               </div>
             </div>
 
             <button
               onClick={() => onDismiss(toast.id)}
-              className="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+              className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors"
               aria-label="Dismiss toast"
             >
               <X className="w-3.5 h-3.5" />

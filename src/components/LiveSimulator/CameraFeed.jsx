@@ -84,41 +84,41 @@ export default function CameraFeed({
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#0B0F19] rounded-2xl border border-white/10 overflow-hidden shadow-2xl w-full max-w-full">
+    <div className="flex flex-col h-full bg-white rounded-3xl border border-sky-100 overflow-hidden shadow-xl shadow-sky-500/5 w-full max-w-full">
       
       {/* Top Camera Status & Controls Bar */}
-      <div className="px-3 sm:px-4 py-3 bg-[#111827] border-b border-white/10 flex flex-wrap items-center justify-between gap-2.5">
+      <div className="px-3 sm:px-4 py-3 bg-[#F8FAFC] border-b border-sky-100 flex flex-wrap items-center justify-between gap-2.5">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
-            <span className="font-mono text-[11px] sm:text-xs font-bold text-white tracking-wider flex items-center gap-1.5 truncate">
-              <Camera className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+            <span className="font-mono text-[11px] sm:text-xs font-bold text-slate-800 tracking-wider flex items-center gap-1.5 truncate">
+              <Camera className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
               CAM_01_OVERHEAD
             </span>
           </div>
-          <span className="text-white/20 text-xs hidden sm:inline">|</span>
-          <span className="text-[10px] sm:text-[11px] font-mono text-slate-400 hidden md:inline">
+          <span className="text-slate-300 text-xs hidden sm:inline">|</span>
+          <span className="text-[10px] sm:text-[11px] font-mono text-slate-500 hidden md:inline">
             1080p @ 60 FPS • OpenCV 4.10
           </span>
         </div>
 
-        {/* Quick Simulator Preset Actions */}
+        {/* Quick Simulator Preset Actions (White Glass Buttons) */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             type="button"
             onClick={onResetDemo}
-            className="px-2.5 py-1.5 text-[11px] sm:text-xs font-mono font-medium rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-colors flex items-center gap-1.5 min-h-[36px]"
+            className="glass-button px-2.5 py-1.5 text-[11px] sm:text-xs font-mono font-bold rounded-xl flex items-center gap-1.5 min-h-[36px]"
             title="Load default 3 items"
             aria-label="Load preset items"
           >
-            <RefreshCw className="w-3 h-3 text-cyan-400" />
+            <RefreshCw className="w-3 h-3 text-sky-500" />
             <span>Preset (3)</span>
           </button>
           {counterItems.length > 0 && (
             <button
               type="button"
               onClick={onClearItems}
-              className="px-2.5 py-1.5 text-[11px] sm:text-xs font-mono text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-lg transition-colors flex items-center gap-1 min-h-[36px]"
+              className="px-2.5 py-1.5 text-[11px] sm:text-xs font-mono font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl transition-colors flex items-center gap-1 min-h-[36px]"
               title="Clear all items"
               aria-label="Clear all items from counter"
             >
@@ -136,23 +136,23 @@ export default function CameraFeed({
         <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
         
         {/* Center Target Crosshairs */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <div className="w-24 sm:w-32 h-24 sm:h-32 border border-emerald-500/30 rounded-full flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
+          <div className="w-24 sm:w-32 h-24 sm:h-32 border border-sky-400/40 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-sky-400"></div>
           </div>
-          <div className="absolute w-36 sm:w-48 h-px bg-emerald-500/30"></div>
-          <div className="absolute h-36 sm:h-48 w-px bg-emerald-500/30"></div>
+          <div className="absolute w-36 sm:w-48 h-px bg-sky-400/40"></div>
+          <div className="absolute h-36 sm:h-48 w-px bg-sky-400/40"></div>
         </div>
 
         {/* Overhead Camera Lens Corner Reticles */}
-        <div className="absolute top-3 left-3 w-3 sm:w-4 h-3 sm:h-4 border-t-2 border-l-2 border-emerald-500/60 pointer-events-none"></div>
-        <div className="absolute top-3 right-3 w-3 sm:w-4 h-3 sm:h-4 border-t-2 border-r-2 border-emerald-500/60 pointer-events-none"></div>
-        <div className="absolute bottom-3 left-3 w-3 sm:w-4 h-3 sm:h-4 border-b-2 border-l-2 border-emerald-500/60 pointer-events-none"></div>
-        <div className="absolute bottom-3 right-3 w-3 sm:w-4 h-3 sm:h-4 border-b-2 border-r-2 border-emerald-500/60 pointer-events-none"></div>
+        <div className="absolute top-3 left-3 w-3 sm:w-4 h-3 sm:h-4 border-t-2 border-l-2 border-sky-400/80 pointer-events-none"></div>
+        <div className="absolute top-3 right-3 w-3 sm:w-4 h-3 sm:h-4 border-t-2 border-r-2 border-sky-400/80 pointer-events-none"></div>
+        <div className="absolute bottom-3 left-3 w-3 sm:w-4 h-3 sm:h-4 border-b-2 border-l-2 border-sky-400/80 pointer-events-none"></div>
+        <div className="absolute bottom-3 right-3 w-3 sm:w-4 h-3 sm:h-4 border-b-2 border-r-2 border-sky-400/80 pointer-events-none"></div>
 
         {/* Live HUD Telemetry Overlay (Top-Left) */}
         <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20 pointer-events-none max-w-[85%]">
-          <div className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 font-mono text-[10px] sm:text-[11px] space-y-1 text-slate-300 shadow-xl">
+          <div className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-black/85 backdrop-blur-md border border-sky-500/30 font-mono text-[10px] sm:text-[11px] space-y-1 text-slate-200 shadow-xl">
             <div className="flex items-center gap-2 sm:gap-3">
               <span className="text-slate-400">FPS:</span>
               <span className="text-emerald-400 font-bold">{fps}</span>
@@ -161,7 +161,7 @@ export default function CameraFeed({
               <span className="text-cyan-400 font-bold">{latency}ms</span>
             </div>
             <div className="flex items-center gap-2 text-[9px] sm:text-[10px] text-slate-400 truncate">
-              <span>Mode: <strong className="text-emerald-300">CentroidTracker</strong></span>
+              <span>Mode: <strong className="text-sky-300">CentroidTracker</strong></span>
               <span>•</span>
               <span>Objs: <strong className="text-white">{counterItems.length}</strong></span>
             </div>
@@ -171,7 +171,7 @@ export default function CameraFeed({
         {/* Glare & Illumination Simulation Overlay */}
         {!claheEnabled && (
           <div className="absolute inset-0 glare-effect pointer-events-none z-10 animate-pulse-subtle">
-            <div className="absolute top-1/4 right-3 sm:right-1/4 px-2.5 py-1 rounded-lg bg-amber-500/25 border border-amber-500/50 text-amber-300 font-mono text-[9px] sm:text-[10px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+            <div className="absolute top-1/4 right-3 sm:right-1/4 px-2.5 py-1 rounded-xl bg-amber-500/30 border border-amber-500/60 text-amber-200 font-mono text-[9px] sm:text-[10px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
               <Sun className="w-3 h-3 animate-spin text-amber-400 flex-shrink-0" />
               <span>Harsh Specular Glare Active</span>
             </div>
@@ -181,8 +181,8 @@ export default function CameraFeed({
         {/* CLAHE Active Status Pill */}
         {claheEnabled && (
           <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 pointer-events-none">
-            <div className="px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-mono text-[10px] sm:text-[11px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
-              <Sparkles className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+            <div className="px-2.5 sm:px-3 py-1 rounded-full bg-sky-500/25 border border-sky-400/60 text-sky-200 font-mono text-[10px] sm:text-[11px] backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+              <Sparkles className="w-3 h-3 text-sky-300 flex-shrink-0" />
               <span>CLAHE Equalized</span>
             </div>
           </div>
@@ -191,17 +191,17 @@ export default function CameraFeed({
         {/* Render Items on Counter Canvas */}
         {counterItems.length === 0 ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
-            <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-3 text-slate-400">
-              <Crosshair className="w-6 sm:w-8 h-6 sm:h-8 text-emerald-400/60 animate-pulse" />
+            <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl bg-white/10 border border-sky-400/30 flex items-center justify-center mb-3 text-sky-300">
+              <Crosshair className="w-6 sm:w-8 h-6 sm:h-8 text-sky-400/70 animate-pulse" />
             </div>
             <h4 className="text-xs sm:text-sm font-bold text-white mb-1 font-sans">Checkout Counter Viewport Empty</h4>
-            <p className="text-[11px] sm:text-xs text-slate-400 max-w-sm mb-4">
+            <p className="text-[11px] sm:text-xs text-slate-300 max-w-sm mb-4">
               Click items below to simulate top-down OpenCV object proposal, centroid coordinates, and instant cart synchronization.
             </p>
             <button
               type="button"
               onClick={onResetDemo}
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 transition-colors flex items-center gap-2 min-h-[40px]"
+              className="glass-button px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 min-h-[40px]"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Populate Counter (3 Sample Items)</span>
@@ -238,12 +238,12 @@ export default function CameraFeed({
               >
                 {/* Physical Item Representation */}
                 <div 
-                  className={`relative w-full h-full rounded-xl border flex flex-col items-center justify-center p-1.5 sm:p-2 text-center transition-transform group-hover:scale-105 ${
+                  className={`relative w-full h-full rounded-2xl border flex flex-col items-center justify-center p-1.5 sm:p-2 text-center transition-transform group-hover:scale-105 shadow-md ${
                     claheEnabled ? 'clahe-active' : ''
                   }`}
                   style={{
-                    backgroundColor: `${item.color}15`,
-                    borderColor: `${item.color}40`,
+                    backgroundColor: `${item.color}25`,
+                    borderColor: `${item.color}60`,
                   }}
                 >
                   <span className="text-xl sm:text-2xl mb-0.5 filter drop-shadow">
@@ -257,30 +257,30 @@ export default function CameraFeed({
                   <span className="text-[10px] sm:text-[11px] font-semibold text-white leading-tight font-sans line-clamp-1">
                     {item.name}
                   </span>
-                  <span className="text-[9px] font-mono text-slate-400">
+                  <span className="text-[9px] font-mono text-slate-300">
                     ${item.price.toFixed(2)}
                   </span>
                 </div>
 
                 {/* OpenCV Active Bounding Box Overlay */}
                 <div 
-                  className={`absolute -inset-1 rounded-xl pointer-events-none transition-colors ${
+                  className={`absolute -inset-1 rounded-2xl pointer-events-none transition-colors ${
                     isOccluded 
                       ? 'border-2 border-dashed border-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.6)] animate-pulse'
-                      : 'border-2 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                      : 'border-2 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
                   }`}
                 >
                   {/* 4 Corner Bracket Accents */}
-                  <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-white"></div>
-                  <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-white"></div>
-                  <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-white"></div>
-                  <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-white"></div>
+                  <div className="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-white"></div>
+                  <div className="absolute -top-1 -right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-white"></div>
+                  <div className="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-white"></div>
+                  <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-white"></div>
 
                   {/* Top Bounding Box Label with ID & Confidence */}
                   <div className={`absolute -top-5 sm:-top-6 left-0 px-1 py-0.5 rounded text-[8px] sm:text-[9px] font-mono font-bold whitespace-nowrap shadow flex items-center gap-1 ${
                     isOccluded
-                      ? 'bg-amber-500 text-black'
-                      : 'bg-emerald-500 text-black'
+                      ? 'bg-amber-400 text-black'
+                      : 'bg-emerald-400 text-black'
                   }`}>
                     <span>#{idx + 1}</span>
                     <span>•</span>
@@ -293,8 +293,8 @@ export default function CameraFeed({
                     style={{
                       left: '50%',
                       top: '50%',
-                      backgroundColor: isOccluded ? '#F59E0B' : '#06B6D4',
-                      boxShadow: isOccluded ? '0 0 8px #F59E0B' : '0 0 8px #06B6D4'
+                      backgroundColor: isOccluded ? '#F59E0B' : '#38BDF8',
+                      boxShadow: isOccluded ? '0 0 8px #F59E0B' : '0 0 10px #38BDF8'
                     }}
                   ></div>
 
@@ -311,7 +311,7 @@ export default function CameraFeed({
                       <div className="text-3xl sm:text-4xl filter drop-shadow-[0_0_12px_rgba(245,158,11,0.9)] opacity-90 transform -rotate-12">
                         ✋
                       </div>
-                      <div className="absolute -bottom-1 bg-amber-500 text-black text-[8px] sm:text-[9px] font-mono font-extrabold px-1.5 py-0.5 rounded border border-black shadow">
+                      <div className="absolute -bottom-1 bg-amber-400 text-black text-[8px] sm:text-[9px] font-mono font-extrabold px-1.5 py-0.5 rounded border border-black shadow">
                         OCCLUSION 88%
                       </div>
                     </div>
@@ -324,24 +324,24 @@ export default function CameraFeed({
 
       </div>
 
-      {/* Simulator Control Toggles & Interactive Filters */}
-      <div className="p-2.5 sm:p-3 bg-[#0E1424] border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+      {/* Simulator Control Toggles (White Glass Buttons) */}
+      <div className="p-3 bg-[#F8FAFC] border-t border-sky-100 flex flex-wrap items-center justify-between gap-2.5">
         
         {/* Toggle 1: Hand Occlusion / Shrinkage Simulation */}
         <button
           type="button"
           onClick={handleToggleHandOcclusion}
-          className={`flex-1 sm:flex-none px-3 py-2 rounded-xl text-[11px] sm:text-xs font-mono font-semibold transition-all flex items-center justify-center sm:justify-start gap-2 border min-h-[42px] ${
+          className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-[11px] sm:text-xs font-mono font-bold transition-all flex items-center justify-center sm:justify-start gap-2 border min-h-[42px] ${
             handOcclusion
-              ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-lg shadow-amber-500/20'
-              : 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/10'
+              ? 'bg-amber-500 text-white border-amber-600 shadow-md shadow-amber-500/20'
+              : 'glass-button'
           }`}
           aria-label="Toggle hand occlusion simulation"
         >
-          <AlertTriangle className={`w-3.5 h-3.5 flex-shrink-0 ${handOcclusion ? 'text-amber-400 animate-bounce' : 'text-slate-400'}`} />
+          <AlertTriangle className={`w-3.5 h-3.5 flex-shrink-0 ${handOcclusion ? 'text-white animate-bounce' : 'text-amber-500'}`} />
           <span>Simulate Occlusion</span>
           <span className={`text-[9px] px-1.5 py-0.2 rounded font-bold ${
-            handOcclusion ? 'bg-amber-500 text-black' : 'bg-slate-700 text-slate-300'
+            handOcclusion ? 'bg-white text-amber-700' : 'bg-sky-100 text-sky-700'
           }`}>
             {handOcclusion ? 'ON' : 'OFF'}
           </span>
@@ -351,17 +351,17 @@ export default function CameraFeed({
         <button
           type="button"
           onClick={handleToggleClahe}
-          className={`flex-1 sm:flex-none px-3 py-2 rounded-xl text-[11px] sm:text-xs font-mono font-semibold transition-all flex items-center justify-center sm:justify-start gap-2 border min-h-[42px] ${
+          className={`flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-[11px] sm:text-xs font-mono font-bold transition-all flex items-center justify-center sm:justify-start gap-2 border min-h-[42px] ${
             claheEnabled
-              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-lg shadow-emerald-500/20'
-              : 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/10'
+              ? 'bg-sky-500 text-white border-sky-600 shadow-md shadow-sky-500/20'
+              : 'glass-button'
           }`}
           aria-label="Toggle OpenCV CLAHE Glare Correction"
         >
-          <Sliders className={`w-3.5 h-3.5 flex-shrink-0 ${claheEnabled ? 'text-emerald-400' : 'text-slate-400'}`} />
+          <Sliders className={`w-3.5 h-3.5 flex-shrink-0 ${claheEnabled ? 'text-white' : 'text-sky-600'}`} />
           <span>Glare Filter (CLAHE)</span>
           <span className={`text-[9px] px-1.5 py-0.2 rounded font-bold ${
-            claheEnabled ? 'bg-emerald-500 text-black' : 'bg-slate-700 text-slate-300'
+            claheEnabled ? 'bg-white text-sky-700' : 'bg-slate-100 text-slate-600'
           }`}>
             {claheEnabled ? 'ON' : 'OFF'}
           </span>
@@ -369,14 +369,14 @@ export default function CameraFeed({
 
       </div>
 
-      {/* Item Library Palette */}
-      <div className="p-3 bg-[#0B0F19] border-t border-white/5 w-full">
+      {/* Item Library Palette (White Glass Item Cards) */}
+      <div className="p-3.5 bg-white border-t border-sky-100 w-full">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] sm:text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-            <Plus className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+          <span className="text-[10px] sm:text-[11px] font-mono text-slate-600 font-bold uppercase tracking-wider flex items-center gap-1.5">
+            <Plus className="w-3 h-3 text-sky-600 flex-shrink-0" />
             Add Items to Counter
           </span>
-          <span className="text-[10px] font-mono text-slate-400">
+          <span className="text-[10px] font-mono text-slate-500 font-bold">
             {counterItems.length}/6 Active
           </span>
         </div>
@@ -389,10 +389,10 @@ export default function CameraFeed({
                 type="button"
                 onClick={() => onAddItem(item)}
                 disabled={alreadyOnCounter}
-                className={`p-2 rounded-xl text-left border transition-all flex flex-col justify-between h-20 relative min-h-[44px] ${
+                className={`p-2.5 rounded-2xl text-left border transition-all flex flex-col justify-between h-20 relative min-h-[44px] ${
                   alreadyOnCounter
-                    ? 'bg-white/5 border-white/5 opacity-50 cursor-not-allowed'
-                    : 'bg-[#111827] hover:bg-[#151F32] border-white/10 hover:border-emerald-500/40 hover:shadow-lg'
+                    ? 'bg-slate-100 border-slate-200 opacity-60 cursor-not-allowed'
+                    : 'bg-white hover:bg-sky-50/80 border-sky-100 hover:border-sky-300 shadow-sm hover:shadow-md'
                 }`}
                 aria-label={`Add ${item.name} to checkout counter`}
               >
@@ -405,21 +405,21 @@ export default function CameraFeed({
                     {item.icon === 'avocado' && '🥑'}
                     {item.icon === 'yogurt' && '🫐'}
                   </span>
-                  <span className="text-[10px] font-mono font-bold text-emerald-400">
+                  <span className="text-[10px] font-mono font-bold text-sky-600">
                     ${item.price.toFixed(2)}
                   </span>
                 </div>
                 <div>
-                  <div className="text-[11px] font-semibold text-white truncate font-sans">
+                  <div className="text-[11px] font-bold text-slate-900 truncate font-sans">
                     {item.name}
                   </div>
-                  <div className="text-[9px] font-mono text-slate-400">
+                  <div className="text-[9px] font-mono text-slate-500 font-medium">
                     {item.sku}
                   </div>
                 </div>
                 {alreadyOnCounter && (
-                  <div className="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center">
-                    <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                  <div className="absolute inset-0 bg-white/80 rounded-2xl flex items-center justify-center">
+                    <span className="text-[10px] font-mono font-bold text-sky-600 flex items-center gap-1">
                       <Check className="w-3 h-3" /> Added
                     </span>
                   </div>
@@ -431,39 +431,39 @@ export default function CameraFeed({
       </div>
 
       {/* Real-Time OpenCV Telemetry Terminal Log Drawer */}
-      <div className="bg-black/90 border-t border-white/10">
+      <div className="bg-[#F8FAFC] border-t border-sky-100">
         <button
           type="button"
           onClick={() => setShowLogs(!showLogs)}
-          className="w-full px-3 sm:px-4 py-2 flex items-center justify-between text-left hover:bg-white/5 transition-colors min-h-[36px]"
+          className="w-full px-3 sm:px-4 py-2 flex items-center justify-between text-left hover:bg-sky-50/80 transition-colors min-h-[36px]"
           aria-label="Toggle terminal logs drawer"
         >
           <div className="flex items-center gap-2">
-            <Terminal className="w-3 h-3 text-emerald-400 flex-shrink-0" />
-            <span className="text-[10px] font-mono text-slate-300 uppercase tracking-wider truncate">
+            <Terminal className="w-3 h-3 text-sky-600 flex-shrink-0" />
+            <span className="text-[10px] font-mono font-bold text-slate-700 uppercase tracking-wider truncate">
               OpenCV Edge Ingestion Stream (Live Console)
             </span>
           </div>
           {showLogs ? (
-            <ChevronDown className="w-3 h-3 text-slate-400 flex-shrink-0" />
+            <ChevronDown className="w-3 h-3 text-slate-500 flex-shrink-0" />
           ) : (
-            <ChevronUp className="w-3 h-3 text-slate-400 flex-shrink-0" />
+            <ChevronUp className="w-3 h-3 text-slate-500 flex-shrink-0" />
           )}
         </button>
 
         {showLogs && (
-          <div className="p-3 font-mono text-[9px] sm:text-[10px] text-slate-300 space-y-1 max-h-24 overflow-y-auto border-t border-white/5 select-text bg-[#06080E]">
+          <div className="p-3 font-mono text-[9px] sm:text-[10px] text-slate-700 space-y-1 max-h-24 overflow-y-auto border-t border-sky-100 select-text bg-white">
             {cvLogs.map((log, i) => (
               <div 
                 key={i} 
                 className={`truncate ${
                   log.includes('ALERT') 
-                    ? 'text-amber-400 font-bold' 
+                    ? 'text-amber-600 font-bold' 
                     : log.includes('CLAHE') 
-                    ? 'text-emerald-300' 
+                    ? 'text-sky-700 font-semibold' 
                     : log.includes('IOT_TELEMETRY')
-                    ? 'text-cyan-300'
-                    : 'text-slate-400'
+                    ? 'text-cyan-700 font-semibold' 
+                    : 'text-slate-600'
                 }`}
               >
                 {log}

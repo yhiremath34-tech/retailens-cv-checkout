@@ -91,7 +91,7 @@ export default function LiveSimulator({ onToast }) {
   };
 
   return (
-    <section id="simulator" className="py-16 sm:py-20 relative bg-[#090D16] w-full max-w-full overflow-hidden">
+    <section id="simulator" className="py-16 sm:py-20 relative bg-[#F0F7FF] w-full max-w-full overflow-hidden">
       {/* Anchor for store analytics navigation link */}
       <div id="store-analytics" className="absolute -top-24"></div>
 
@@ -99,45 +99,45 @@ export default function LiveSimulator({ onToast }) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100/80 border border-sky-200 text-sky-700 text-xs font-mono mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-sky-500" />
             <span>Interactive Edge-to-Cloud Showcase</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
             Live Retail Checkout & Store Intelligence Simulator
           </h2>
-          <p className="mt-2 sm:mt-3 text-slate-400 text-xs sm:text-base leading-relaxed">
+          <p className="mt-2 sm:mt-3 text-slate-600 text-xs sm:text-base leading-relaxed">
             Test real-time OpenCV centroid tracking, specular glare correction, and hand-occlusion loss prevention, or switch to executive AWS QuickSight BI analytics.
           </p>
         </div>
 
-        {/* Tab Switcher */}
+        {/* Tab Switcher (White Glass Container & White Glass Buttons) */}
         <div className="flex justify-center mb-6 sm:mb-8 w-full">
-          <div className="p-1 sm:p-1.5 rounded-2xl bg-[#111827] border border-white/10 flex items-center gap-1 sm:gap-2 shadow-xl max-w-full overflow-x-auto">
+          <div className="p-1 sm:p-1.5 rounded-2xl bg-white/80 border border-sky-200/90 shadow-md backdrop-blur-md flex items-center gap-1 sm:gap-2 max-w-full overflow-x-auto">
             <button
               type="button"
               onClick={() => setActiveTab('EDGE_CHECKOUT')}
-              className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 min-h-[44px] whitespace-nowrap ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm transition-all duration-200 min-h-[44px] whitespace-nowrap ${
                 activeTab === 'EDGE_CHECKOUT'
-                  ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-black shadow-lg shadow-emerald-500/20 font-bold'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-sky-500 text-white shadow-md shadow-sky-500/20 font-bold border border-sky-600'
+                  : 'glass-button font-semibold'
               }`}
               aria-label="Switch to Tab A: Live Edge Checkout Terminal"
             >
               <Camera className="w-4 h-4 flex-shrink-0" />
               <span>Tab A: Live Edge Checkout Terminal</span>
               {handOcclusion && (
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                <span className="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
               )}
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('QUICKSIGHT_BI')}
-              className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 min-h-[44px] whitespace-nowrap ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm transition-all duration-200 min-h-[44px] whitespace-nowrap ${
                 activeTab === 'QUICKSIGHT_BI'
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-400 text-black shadow-lg shadow-amber-500/20 font-bold'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-amber-500 text-white shadow-md shadow-amber-500/20 font-bold border border-amber-600'
+                  : 'glass-button font-semibold'
               }`}
               aria-label="Switch to Tab B: AWS QuickSight Store Analytics"
             >
